@@ -1,41 +1,71 @@
 import styled from "styled-components";
 import { Icon } from "@blueprintjs/core";
 import { ColumnWrapper, RowWrapper } from "../../reusable/styled-components";
+import { Component, useState } from "react";
+import SidebarOption from "./sidebar-option";
 
 const Sidebar = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const sidebarRows = [
+    {
+      icon: <StyledIcon icon="mountain" size={40} />,
+      label: <h1>Tick-List</h1>,
+    },
+    {
+      icon: <StyledIcon icon="search" size={25} />,
+      label: <p>Search</p>,
+    },
+  ];
+
   return (
-    <SidebarWrapper>
-      <Logo>
-        <StyledIcon icon="mountain" size={45} />
-        <h1>Tick-List</h1>
-      </Logo>
-    </SidebarWrapper>
+    <Wrapper>
+      <SidebarWrapper className={isCollapsed ? "collapsed" : "expanded"}>
+        {sidebarRows.map((row) => {
+          return <SidebarOption isCollapsed={isCollapsed} content={row} />;
+        })}
+        <button onClick={() => setIsCollapsed(!isCollapsed)}>Collapse</button>
+      </SidebarWrapper>
+    </Wrapper>
   );
 };
 
 export default Sidebar;
 
+const Wrapper = styled.div`
+  position: relative;
+  left: 0;
+  .collapsed {
+    width: 60px;
+  }
+  .expanded {
+    width: 170px;
+  }
+`;
+
 const SidebarWrapper = styled(ColumnWrapper)`
-  width: 250px;
   height: 100vh;
+  border: 0px;
   border-right: 1px solid ${(props) => props.theme.colors.borderColor};
   padding: 10px 15px;
-  box-sizing: border-box;
+  transition: width 0.2s ease-in-out;
+  position: relative;
+  overflow-x: hidden;
+  row-gap: 20px;
+  button {
+    width: 50px;
+    height: 40px;
+    background-color: ${(props) => props.theme.colors.primaryWhite};
+  }
+  .selected {
+    background-color: ${(props) => props.theme.colors.highlight1};
+    grid-template-columns: 40px 0px;
+  }
+  .collapsed {
+    column-gap: 0px;
+  }
 `;
 
 const StyledIcon = styled(Icon)`
   fill: ${(props) => props.theme.colors.primaryWhite};
-`;
-
-const Logo = styled(RowWrapper)`
-  margin-right: 3px;
-  align-items: center;
-  justify-content: center;
-  column-gap: 5px;
-  h1 {
-    font-family: ${(props) => props.theme.fonts.body};
-    color: ${(props) => props.theme.colors.primaryWhite};
-    margin: 0px;
-    font-weight: 600;
-  }
 `;

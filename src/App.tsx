@@ -5,7 +5,8 @@ const theme = {
   colors: {
     primaryWhite: "#e0e3e7",
     primaryBlack: "#202124",
-    highlight1: "#1b1236",
+    highlight1: "#7F8082",
+    highlight2: "#303134",
     borderColor: "#919191",
   },
   fonts: {
