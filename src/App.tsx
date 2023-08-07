@@ -1,5 +1,6 @@
 import styled, { ThemeProvider } from "styled-components";
 import Sidebar from "./components/sidebar/sidebar";
+import NavBar from "./components/navbar/navbar";
 
 const theme = {
   colors: {
@@ -23,6 +24,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <ApplicationWrapper>
         <Sidebar />
+        <NavBar />
       </ApplicationWrapper>
     </ThemeProvider>
   );
@@ -32,4 +34,5 @@ export default App;
 
 const ApplicationWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.primaryBlack};
+  display: flex;
 `;
