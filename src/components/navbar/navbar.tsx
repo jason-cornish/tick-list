@@ -17,5 +17,6 @@ const Nav = styled.div`
   width: 100%;
   height: 60px;
   justify-content: space-between;
+  background-color: ${(props) => props.theme.colors.primaryBlack};
   font-family: ${(props) => props.theme.fonts.header};
 `;

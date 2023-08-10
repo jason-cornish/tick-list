@@ -8,6 +8,7 @@ type PropsTypes = {
   content: {
     icon: any;
     label: any;
+    id: string;
   };
 };
 
@@ -23,7 +24,7 @@ const SidebarOption = (props: PropsTypes) => {
   };
 
   return (
-    <SidebarOptionWrapper className={classNameSwitch()}>
+    <SidebarOptionWrapper className={classNameSwitch()} id={content.id}>
       {content.icon}
       {renderSwitch(content.label)}
     </SidebarOptionWrapper>
@@ -34,12 +35,13 @@ export default SidebarOption;
 
 const SidebarOptionWrapper = styled.div`
   display: grid;
-  grid-template-columns: 40px 100%;
-  column-gap: 5px;
+  box-sizing: border-box;
+
   cursor: pointer;
   border-radius: ${(props) => props.theme.other.borderRadius};
-  padding: 5px 10px;
+  padding: 10px;
   box-sizing: border-box;
+  align-items: center;
   .collapsed {
     display: none;
     column-gap: 0px;
@@ -48,8 +50,7 @@ const SidebarOptionWrapper = styled.div`
     font-family: ${(props) => props.theme.fonts.body};
     color: ${(props) => props.theme.colors.primaryWhite};
     margin: 0px;
-    margin-top: 6px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 26px;
     white-space: nowrap;
   }

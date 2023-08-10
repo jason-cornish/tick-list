@@ -6,6 +6,7 @@ const theme = {
   colors: {
     primaryWhite: "#e0e3e7",
     primaryBlack: "#202124",
+    secondaryBlack: "#141517",
     highlight1: "#7F8082",
     highlight2: "#303134",
     borderColor: "#919191",
@@ -15,7 +16,7 @@ const theme = {
     body: "Archivo",
   },
   other: {
-    borderRadius: "3px",
+    borderRadius: "5px",
   },
 };
 
@@ -33,6 +34,8 @@ const App = () => {
 export default App;
 
 const ApplicationWrapper = styled.div`
-  background-color: ${(props) => props.theme.colors.primaryBlack};
+  background-color: ${(props) => props.theme.colors.secondaryBlack};
+  padding: 10px;
   display: flex;
+  column-gap: 10px;
 `;
