@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { Icon } from "@blueprintjs/core";
-import { useState } from "react";
+import { DataContext } from "../../App";
+import React, { useContext } from "react";
 
-const SearchBar = () => {
-  const [search, setSearch] = useState("");
+const SearchBar = (props: any) => {
+  const { searchQuery, setSearchQuery } = useContext(DataContext);
 
   return (
     <SearchWrapper>
@@ -19,11 +20,11 @@ const SearchBar = () => {
         <StyledIcon icon="search" size={15} />
         <input
           onChange={(event) => {
-            setSearch(event.target.value);
+            setSearchQuery(event.target.value);
           }}
           placeholder="Search climbs or profiles..."
         />
-        {search.length >= 1 ? (
+        {searchQuery.length >= 1 ? (
           <BackButton>
             <StyledIcon icon="cross" size={15} />
           </BackButton>

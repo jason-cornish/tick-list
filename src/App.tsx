@@ -1,6 +1,9 @@
 import styled, { ThemeProvider } from "styled-components";
 import Sidebar from "./components/sidebar/sidebar";
 import NavBar from "./components/navbar/navbar";
+import Display from "./components/display/display";
+import { getProfiles } from "./data/profiles";
+import React, { createContext, useEffect, useState } from "react";
 
 const theme = {
   colors: {
@@ -20,14 +23,38 @@ const theme = {
   },
 };
 
+export const DataContext = createContext<any>({} as any);
+
 const App = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [profiles, setProfiles] = useState<{ [key: string]: any }>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadedProfiles = getProfiles();
+    setProfiles(loadedProfiles);
+    setLoading(false);
+  }, [setProfiles, setLoading]);
+
   return (
-    <ThemeProvider theme={theme}>
-      <ApplicationWrapper>
-        <Sidebar />
-        <NavBar />
-      </ApplicationWrapper>
-    </ThemeProvider>
+    <DataContext.Provider
+      value={{ searchQuery, setSearchQuery, profiles, setProfiles }}
+    >
+      <ThemeProvider theme={theme}>
+        <ApplicationWrapper>
+          <Sidebar />
+          <ContentWrapper>
+            <NavBar />
+            {loading && (
+              <div>
+                <h3>loading...</h3>
+              </div>
+            )}
+            {!loading && <Display />}
+          </ContentWrapper>
+        </ApplicationWrapper>
+      </ThemeProvider>
+    </DataContext.Provider>
   );
 };
 
@@ -38,4 +65,10 @@ const ApplicationWrapper = styled.div`
   padding: 10px;
   display: flex;
   column-gap: 10px;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
