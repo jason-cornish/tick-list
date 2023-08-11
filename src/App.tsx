@@ -7,10 +7,10 @@ import React, { createContext, useEffect, useState } from "react";
 
 const theme = {
   colors: {
-    primaryWhite: "#e0e3e7",
+    primaryWhite: "#d5d9de",
     primaryBlack: "#202124",
     secondaryBlack: "#141517",
-    highlight1: "#7F8082",
+    highlight1: "#9d9e9f",
     highlight2: "#303134",
     borderColor: "#919191",
   },

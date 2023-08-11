@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { Icon } from "@blueprintjs/core";
-import { ColumnWrapper, RowWrapper } from "../../reusable/styled-components";
-import { Component, useState } from "react";
 
 type PropsTypes = {
   isCollapsed: boolean;
@@ -39,29 +36,44 @@ const SidebarOptionWrapper = styled.div`
 
   cursor: pointer;
   border-radius: ${(props) => props.theme.other.borderRadius};
-  padding: 10px;
+  padding: 10px 15px;
   box-sizing: border-box;
   align-items: center;
-  .collapsed {
-    display: none;
-    column-gap: 0px;
+  column-gap: 15px;
+  grid-template-columns: 25px 100%;
+  transition: background-color 300ms linear;
+
+  span {
+    transition: fill 300ms linear;
+    height: 25px;
+    width: 25px;
+    fill: ${(props) => props.theme.colors.primaryWhite};
   }
   h1 {
     font-family: ${(props) => props.theme.fonts.body};
     color: ${(props) => props.theme.colors.primaryWhite};
     margin: 0px;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 26px;
     white-space: nowrap;
   }
   p {
-    font-family: ${(props) => props.theme.fonts.body};
+    font-family: ${(props) => props.theme.fonts.header};
     color: ${(props) => props.theme.colors.primaryWhite};
+    font-weight: 500;
     font-size: 20px;
     white-space: nowrap;
     margin: 0px;
+    transition: color 300ms linear;
   }
   :hover {
     background-color: ${(props) => props.theme.colors.highlight2};
+
+    p {
+      color: white;
+    }
+    span {
+      fill: white;
+    }
   }
 `;

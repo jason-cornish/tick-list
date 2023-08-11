@@ -25,7 +25,7 @@ const AcctIcon = styled.div`
   width: 30px;
   height: 30px;
   background-color: ${(props) => props.theme.colors.highlight1};
-  border-radius: 999px;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   align-items: center;

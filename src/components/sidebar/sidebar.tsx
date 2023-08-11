@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Icon } from "@blueprintjs/core";
-import { ColumnWrapper, RowWrapper } from "../../reusable/styled-components";
-import { Component, useState } from "react";
+import { ColumnWrapper } from "../../reusable/styled-components";
+import { useState } from "react";
 import SidebarOption from "./sidebar-option";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [buttonTimeout, setButtonTimeout] = useState(false);
 
   const sidebarRows = [
     {
@@ -23,7 +24,32 @@ const Sidebar = () => {
       label: <p>Search</p>,
       id: "search",
     },
+    {
+      icon: <StyledIcon icon="people" size={25} />,
+      label: <p>My Ascents</p>,
+      id: "people",
+    },
+    {
+      icon: <StyledIcon icon="dashboard" size={25} />,
+      label: <p>My KPI</p>,
+      id: "kpi",
+    },
+    {
+      icon: <StyledIcon icon="add" size={25} />,
+      label: <p>Log Ascent</p>,
+      id: "add",
+    },
   ];
+
+  /**Prevents accidental double-clicking of collapse/expand button*/
+  const handleCollapseExpand = () => {
+    if (buttonTimeout) {
+      setTimeout(() => {
+        setButtonTimeout(!buttonTimeout);
+      }, 500);
+    }
+    setIsCollapsed(!isCollapsed);
+  };
 
   return (
     <Wrapper>
@@ -31,7 +57,7 @@ const Sidebar = () => {
         {sidebarRows.map((row) => {
           return <SidebarOption isCollapsed={isCollapsed} content={row} />;
         })}
-        <button onClick={() => setIsCollapsed(!isCollapsed)}>Collap</button>
+        <button onClick={handleCollapseExpand}>Collap</button>
       </SidebarWrapper>
     </Wrapper>
   );
@@ -46,17 +72,21 @@ const Wrapper = styled.div`
   left: 0;
   box-sizing: border-box;
   .collapsed {
-    width: 60px;
+    width: 55px;
   }
   .expanded {
     width: 170px;
   }
 `;
 
+const StyledIcon = styled(Icon)`
+  fill: ${(props) => props.theme.colors.primaryWhite};
+`;
+
 const SidebarWrapper = styled(ColumnWrapper)`
   height: 100vh;
   border: 0px;
-  padding: 10px 15px;
+  padding: 10px;
   transition: width 0.2s ease-in-out;
   position: relative;
   overflow-x: hidden;
@@ -72,34 +102,16 @@ const SidebarWrapper = styled(ColumnWrapper)`
     grid-template-columns: 40px 0px;
   }
   .collapsed {
-    column-gap: 0px;
-  }
-  #search {
-    grid-template-columns: 25px 100%;
-    column-gap: 20px;
-    span {
-      height: 25px !important;
-      width: 25px !important;
-    }
-  }
-  #home {
-    column-gap: 20px;
-    grid-template-columns: 25px 0px;
-    span {
-      height: 25px !important;
-      width: 25px !important;
-    }
+    column-gap: 0px !important;
   }
   #logo {
     column-gap: 10px;
-    grid-template-columns: 35px 100%;
+    grid-template-columns: 25px 100%;
     span {
-      height: 35px !important;
-      width: 35px !important;
+      margin-left: -5px;
+      margin-top: -5px;
+      height: 30px !important;
+      width: 25px !important;
     }
   }
-`;
-
-const StyledIcon = styled(Icon)`
-  fill: ${(props) => props.theme.colors.primaryWhite};
 `;
