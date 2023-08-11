@@ -10,7 +10,7 @@ const theme = {
     primaryWhite: "#d5d9de",
     primaryBlack: "#202124",
     secondaryBlack: "#141517",
-    highlight1: "#9d9e9f",
+    highlight1: "#5f6064",
     highlight2: "#303134",
     borderColor: "#919191",
   },
@@ -19,7 +19,7 @@ const theme = {
     body: "Archivo",
   },
   other: {
-    borderRadius: "5px",
+    borderRadius: "7px",
   },
 };
 
@@ -27,6 +27,7 @@ export const DataContext = createContext<any>({} as any);
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTab, setSelectedTab] = useState("home");
   const [profiles, setProfiles] = useState<{ [key: string]: any }>({});
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +43,7 @@ const App = () => {
     >
       <ThemeProvider theme={theme}>
         <ApplicationWrapper>
-          <Sidebar />
+          <Sidebar setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
           <ContentWrapper>
             <NavBar />
             {loading && (

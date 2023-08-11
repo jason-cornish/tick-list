@@ -6,6 +6,8 @@ type PropsTypes = {
     icon: any;
     label: any;
     id: string;
+    onClick: any;
+    selected: string;
   };
 };
 
@@ -17,11 +19,17 @@ const SidebarOption = (props: PropsTypes) => {
   };
 
   const classNameSwitch = () => {
-    return isCollapsed ? "collapsed" : "expanded";
+    return isCollapsed
+      ? `collapsed ${content.selected}`
+      : `expanded ${content.selected}`;
   };
 
   return (
-    <SidebarOptionWrapper className={classNameSwitch()} id={content.id}>
+    <SidebarOptionWrapper
+      className={classNameSwitch()}
+      id={content.id}
+      onClick={content.onClick}
+    >
       {content.icon}
       {renderSwitch(content.label)}
     </SidebarOptionWrapper>
@@ -61,7 +69,7 @@ const SidebarOptionWrapper = styled.div`
     font-family: ${(props) => props.theme.fonts.header};
     color: ${(props) => props.theme.colors.primaryWhite};
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
     white-space: nowrap;
     margin: 0px;
     transition: color 300ms linear;

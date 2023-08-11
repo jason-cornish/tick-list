@@ -1,43 +1,71 @@
 import styled from "styled-components";
 import { Icon } from "@blueprintjs/core";
 import { ColumnWrapper } from "../../reusable/styled-components";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import SidebarOption from "./sidebar-option";
 
-const Sidebar = () => {
+type PropsType = {
+  setSelectedTab: any;
+  selectedTab: string;
+};
+
+const Sidebar = (props: PropsType) => {
+  const { setSelectedTab, selectedTab } = props;
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [buttonTimeout, setButtonTimeout] = useState(false);
+
+  console.log(selectedTab);
+
+  const selectTab = (tab: string) => {
+    setSelectedTab(tab);
+  };
+
+  const isTabSelected = (tab: string) => {
+    return selectedTab === tab ? "selected" : "unselected";
+  };
 
   const sidebarRows = [
     {
       icon: <StyledIcon icon="mountain" size={35} />,
+      onClick: () => selectTab("logo"),
       label: <h1>Tick-List</h1>,
       id: "logo",
+      selected: isTabSelected("logo"),
     },
     {
       icon: <StyledIcon icon="home" size={25} />,
+      onClick: () => selectTab("home"),
       label: <p>Home</p>,
       id: "home",
+      selected: isTabSelected("home"),
     },
     {
       icon: <StyledIcon icon="search" size={25} />,
+      onClick: () => selectTab("search"),
       label: <p>Search</p>,
       id: "search",
+      selected: isTabSelected("search"),
     },
     {
-      icon: <StyledIcon icon="people" size={25} />,
+      icon: <StyledIcon icon="person" size={25} />,
+      onClick: () => selectTab("ascents"),
       label: <p>My Ascents</p>,
-      id: "people",
+      id: "ascents",
+      selected: isTabSelected("ascents"),
     },
     {
       icon: <StyledIcon icon="dashboard" size={25} />,
+      onClick: () => selectTab("kpi"),
       label: <p>My KPI</p>,
       id: "kpi",
+      selected: isTabSelected("kpi"),
     },
     {
       icon: <StyledIcon icon="add" size={25} />,
+      onClick: () => selectTab("add"),
       label: <p>Log Ascent</p>,
       id: "add",
+      selected: isTabSelected("add"),
     },
   ];
 
@@ -75,7 +103,7 @@ const Wrapper = styled.div`
     width: 55px;
   }
   .expanded {
-    width: 170px;
+    width: 165px;
   }
 `;
 
@@ -99,7 +127,12 @@ const SidebarWrapper = styled(ColumnWrapper)`
   }
   .selected {
     background-color: ${(props) => props.theme.colors.highlight1};
-    grid-template-columns: 40px 0px;
+    p {
+      color: white;
+    }
+    span {
+      fill: white;
+    }
   }
   .collapsed {
     column-gap: 0px !important;
