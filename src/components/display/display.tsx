@@ -3,11 +3,14 @@ import { DataContext } from "../../App";
 import styled from "styled-components";
 
 const Display = (props: any) => {
-  const { profiles, searchQuery } = useContext(DataContext);
+  const { profiles, searchQuery, loading } = useContext(DataContext);
 
-  return (
-    <DisplayWrapper>
-      {profiles
+  const renderContent = () => {
+    console.log(loading, profiles);
+    return loading ? (
+      <div />
+    ) : (
+      profiles
         .filter((profile: any) => {
           if (searchQuery === "") {
             return profile;
@@ -43,17 +46,23 @@ const Display = (props: any) => {
               </ul>
             </ProfileCard>
           );
-        })}
-    </DisplayWrapper>
-  );
+        })
+    );
+  };
+
+  return <DisplayWrapper>{renderContent()}</DisplayWrapper>;
 };
 export default Display;
 
 const DisplayWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   gap: 10px;
-  margin: 10px 20px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  background-color: ${(props) => props.theme.colors.primaryBlack};
 `;
 
 const ProfileCard = styled.div`

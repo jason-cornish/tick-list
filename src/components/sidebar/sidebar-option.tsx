@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 type PropsTypes = {
@@ -8,6 +9,7 @@ type PropsTypes = {
     id: string;
     onClick: any;
     selected: string;
+    link?: string;
   };
 };
 
@@ -25,14 +27,16 @@ const SidebarOption = (props: PropsTypes) => {
   };
 
   return (
-    <SidebarOptionWrapper
-      className={classNameSwitch()}
-      id={content.id}
-      onClick={content.onClick}
-    >
-      {content.icon}
-      {renderSwitch(content.label)}
-    </SidebarOptionWrapper>
+    <Link to={`${content.link}`} style={{ textDecoration: "none" }}>
+      <SidebarOptionWrapper
+        className={classNameSwitch()}
+        id={content.id}
+        onClick={content.onClick}
+      >
+        {content.icon}
+        {renderSwitch(content.label)}
+      </SidebarOptionWrapper>
+    </Link>
   );
 };
 
@@ -48,13 +52,13 @@ const SidebarOptionWrapper = styled.div`
   box-sizing: border-box;
   align-items: center;
   column-gap: 15px;
-  grid-template-columns: 25px 100%;
+  grid-template-columns: 22px 100%;
   transition: background-color 300ms linear;
 
   span {
     transition: fill 300ms linear;
-    height: 25px;
-    width: 25px;
+    height: 22px;
+    width: 22px;
     fill: ${(props) => props.theme.colors.primaryWhite};
   }
   h1 {
@@ -73,15 +77,5 @@ const SidebarOptionWrapper = styled.div`
     white-space: nowrap;
     margin: 0px;
     transition: color 300ms linear;
-  }
-  :hover {
-    background-color: ${(props) => props.theme.colors.highlight2};
-
-    p {
-      color: white;
-    }
-    span {
-      fill: white;
-    }
   }
 `;

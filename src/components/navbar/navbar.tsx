@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import SearchBar from "./searchbar";
 import User from "./user";
+
 const NavBar = () => {
   return (
     <Nav>

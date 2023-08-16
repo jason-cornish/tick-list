@@ -41,13 +41,13 @@ export default SearchBar;
 const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
+  padding: 15px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0 0 0 15px;
 `;
 
 const SearchInput = styled.form`

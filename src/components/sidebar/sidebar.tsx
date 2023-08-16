@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Icon } from "@blueprintjs/core";
 import { ColumnWrapper } from "../../reusable/styled-components";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import SidebarOption from "./sidebar-option";
 
 type PropsType = {
@@ -33,39 +33,44 @@ const Sidebar = (props: PropsType) => {
       selected: isTabSelected("logo"),
     },
     {
-      icon: <StyledIcon icon="home" size={25} />,
+      icon: <StyledIcon icon="home" size={22} />,
       onClick: () => selectTab("home"),
       label: <p>Home</p>,
       id: "home",
       selected: isTabSelected("home"),
+      link: "/home",
     },
     {
-      icon: <StyledIcon icon="search" size={25} />,
-      onClick: () => selectTab("search"),
-      label: <p>Search</p>,
-      id: "search",
-      selected: isTabSelected("search"),
-    },
-    {
-      icon: <StyledIcon icon="person" size={25} />,
+      icon: <StyledIcon icon="person" size={22} />,
       onClick: () => selectTab("ascents"),
       label: <p>My Ascents</p>,
       id: "ascents",
       selected: isTabSelected("ascents"),
+      link: "/ascents",
     },
     {
-      icon: <StyledIcon icon="dashboard" size={25} />,
+      icon: <StyledIcon icon="search" size={22} />,
+      onClick: () => selectTab("search"),
+      label: <p>Search</p>,
+      id: "search",
+      selected: isTabSelected("search"),
+      link: "/search",
+    },
+    {
+      icon: <StyledIcon icon="dashboard" size={22} />,
       onClick: () => selectTab("kpi"),
       label: <p>My KPI</p>,
       id: "kpi",
       selected: isTabSelected("kpi"),
+      link: "/kpi",
     },
     {
-      icon: <StyledIcon icon="add" size={25} />,
+      icon: <StyledIcon icon="add" size={22} />,
       onClick: () => selectTab("add"),
       label: <p>Log Ascent</p>,
       id: "add",
       selected: isTabSelected("add"),
+      link: "/add",
     },
   ];
 
@@ -83,7 +88,13 @@ const Sidebar = (props: PropsType) => {
     <Wrapper>
       <SidebarWrapper className={isCollapsed ? "collapsed" : "expanded"}>
         {sidebarRows.map((row) => {
-          return <SidebarOption isCollapsed={isCollapsed} content={row} />;
+          return (
+            <SidebarOption
+              isCollapsed={isCollapsed}
+              content={row}
+              key={`option-${row}`}
+            />
+          );
         })}
         <button onClick={handleCollapseExpand}>Collap</button>
       </SidebarWrapper>
@@ -100,7 +111,7 @@ const Wrapper = styled.div`
   left: 0;
   box-sizing: border-box;
   .collapsed {
-    width: 55px;
+    width: 52px;
   }
   .expanded {
     width: 165px;
@@ -115,7 +126,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
   height: 100vh;
   border: 0px;
   padding: 10px;
-  transition: width 0.2s ease-in-out;
+  transition: width 300ms ease-in-out;
   position: relative;
   overflow-x: hidden;
   align-items: center;
@@ -134,6 +145,18 @@ const SidebarWrapper = styled(ColumnWrapper)`
       fill: white;
     }
   }
+  .unselected {
+    :hover {
+      background-color: ${(props) => props.theme.colors.highlight2};
+
+      p {
+        color: white;
+      }
+      span {
+        fill: white;
+      }
+    }
+  }
   .collapsed {
     column-gap: 0px !important;
   }
@@ -141,7 +164,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
     column-gap: 10px;
     grid-template-columns: 25px 100%;
     span {
-      margin-left: -5px;
+      margin-left: -8px;
       margin-top: -5px;
       height: 30px !important;
       width: 25px !important;

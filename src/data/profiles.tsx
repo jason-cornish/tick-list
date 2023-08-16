@@ -1,4 +1,6 @@
-export const getProfiles = () => {
+export const getProfiles = async () => {
+  //simulates 1 second loading time
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   return [
     {
       pname: "Jason Cornish",
