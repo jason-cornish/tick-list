@@ -109,12 +109,13 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: 5px;
   left: 0;
+  padding: 0px 10px;
   box-sizing: border-box;
   .collapsed {
     width: 52px;
   }
   .expanded {
-    width: 165px;
+    width: 170px;
   }
 `;
 
@@ -123,7 +124,6 @@ const StyledIcon = styled(Icon)`
 `;
 
 const SidebarWrapper = styled(ColumnWrapper)`
-  height: 100vh;
   border: 0px;
   padding: 10px;
   transition: width 300ms ease-in-out;
@@ -131,6 +131,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
   overflow-x: hidden;
   align-items: center;
   row-gap: 10px;
+  box-sizing: border-box;
   button {
     width: 50px;
     height: 40px;

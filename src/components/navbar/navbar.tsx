@@ -17,6 +17,7 @@ const Nav = styled.div`
   display: flex;
   width: 100%;
   height: 60px;
+  box-sizing: border-box;
   justify-content: space-between;
   background-color: ${(props) => props.theme.colors.primaryBlack};
   font-family: ${(props) => props.theme.fonts.header};

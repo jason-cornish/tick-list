@@ -1,7 +1,7 @@
-import styled, { ThemeProvider } from "styled-components";
+import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 import Sidebar from "./components/sidebar/sidebar";
 import NavBar from "./components/navbar/navbar";
-import Display from "./components/display/display";
+import Display from "./components/display/search";
 import { getProfiles } from "./data/profiles";
 import React, { createContext, useEffect, useState } from "react";
 import {
@@ -11,7 +11,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import Ascents from "./components/ascents";
+import Ascents from "./components/display/ascents/ascents";
 
 const theme = {
   colors: {
@@ -63,7 +63,6 @@ const App = () => {
 
             <ContentWrapper>
               <NavBar />
-
               <Routes>
                 <Route path="/ascents" element={<Ascents />}></Route>
                 <Route path="/search" element={<Display />}></Route>
@@ -83,10 +82,14 @@ const ApplicationWrapper = styled.div`
   padding: 10px;
   display: flex;
   column-gap: 10px;
+  height: fill-available;
 `;
 
 const ContentWrapper = styled.div`
   width: 100%;
+  height: fill-available;
+  background-color: ${(props) => props.theme.colors.primaryBlack};
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 `;
