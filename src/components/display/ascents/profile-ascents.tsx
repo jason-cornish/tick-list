@@ -7,6 +7,26 @@ const ProfileAscents = (props: any) => {
 
   const [selectedTab, setSelectedTab] = useState("recent");
 
+  const stringifyAttempts = (attemptCount: number) => {
+    return attemptCount === 1 ? "Flash" : `${attemptCount} Tries`;
+  };
+
+  const stringifyGrade = (grade: number, routeType: string) => {
+    return routeType === "boulder" ? `V${grade}` : `5.${grade}`;
+  };
+
+  /*
+{
+        name: "Sophies Problem",
+        routeType: "boulder",
+        grade: 7,
+        attempts: 1,
+        date: 1693516428,
+        angle: 45,
+        location: "Moonboard",
+      },
+  */
+
   const renderAscents = () => {
     if (profile.ascents.length === 0) {
       return <NoData></NoData>;
@@ -16,7 +36,12 @@ const ProfileAscents = (props: any) => {
         {profile.ascents.map((ascent: any) => {
           return (
             <Ascent>
-              <FirstColumn></FirstColumn>
+              <FirstColumn>
+                <h1>{stringifyGrade(ascent.grade, ascent.routeType)}</h1>
+                <h2 className={ascent.attemptCount > 1 ? "non-flash" : "flash"}>
+                  {stringifyAttempts(ascent.attempts)}
+                </h2>
+              </FirstColumn>
             </Ascent>
           );
         })}
@@ -102,6 +127,16 @@ const AscentsContainer = styled.div`
 
 const NoData = styled(ColumnWrapper)``;
 
-const Ascent = styled(RowWrapper)``;
+const Ascent = styled(RowWrapper)`
+  color: ${(props) => props.theme.colors.primaryWhite};
+  background-color: ${(props) => props.theme.colors.highlight2};
+  border-radius: ${(props) => props.theme.other.borderRadius};
+  padding: 15px;
+`;
 
-const FirstColumn = styled(ColumnWrapper)``;
+const FirstColumn = styled(ColumnWrapper)`
+  align-items: center;
+  .flash {
+    color: #0fa973;
+  }
+`;
