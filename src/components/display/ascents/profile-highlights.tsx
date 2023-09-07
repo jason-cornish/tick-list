@@ -31,6 +31,7 @@ const ProfileHighlights = (props: any) => {
         </Highlight>
         <h3>Best Angle</h3>
       </HighlightWrapper>
+      <DataVisualizations></DataVisualizations>
     </ProfileHighlightsWrapper>
   );
 };
@@ -38,7 +39,13 @@ const ProfileHighlights = (props: any) => {
 export default ProfileHighlights;
 
 const ProfileHighlightsWrapper = styled(RowWrapper)`
-  column-gap: 25px;
+  column-gap: 15px;
+  flex-wrap: wrap;
+  row-gap: 15px;
+  @media only screen and (max-width: 1200px) {
+    column-gap: 15px;
+    row-gap: 15px;
+  }
 `;
 
 const HighlightWrapper = styled(ColumnWrapper)`
@@ -57,3 +64,5 @@ const Highlight = styled(RowWrapper)`
   background-color: ${(props) => props.theme.colors.highlight2};
   border-radius: ${(props) => props.theme.other.borderRadius};
 `;
+
+const DataVisualizations = styled(ColumnWrapper)``;

@@ -10,9 +10,11 @@ const ProfileInfo = (props: any) => {
       <ProfileText>
         <ProfileName>
           <h1 id="profile">{profile.name}</h1>
-          <p>{profile.gender}</p>
         </ProfileName>
-        <ProfileDetail>{profile.location}</ProfileDetail>
+        <ProfileDetail></ProfileDetail>
+        <ProfileDetail>
+          {profile.location} - {profile.gender}
+        </ProfileDetail>
         <ProfileDetail>
           {profile.maxBoulder} / {profile.maxRoute}
         </ProfileDetail>
@@ -28,11 +30,12 @@ const ProfileInfoWrapper = styled(RowWrapper)`
   column-gap: 15px;
   align-items: center;
   font-family: ${(props) => props.theme.fonts.header};
+  position: relative;
 `;
 
 const AcctIcon = styled.div`
-  width: 170px;
-  height: 170px;
+  width: 150px;
+  height: 150px;
   background-color: ${(props) => props.theme.colors.highlight1};
   border-radius: 50%;
   display: flex;

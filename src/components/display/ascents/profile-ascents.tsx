@@ -1,3 +1,4 @@
+import { Icon } from "@blueprintjs/core";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ColumnWrapper, RowWrapper } from "../../../reusable/styled-components";
@@ -34,14 +35,30 @@ const ProfileAscents = (props: any) => {
     return (
       <>
         {profile.ascents.map((ascent: any) => {
+          const date = new Date(ascent.date * 1000).toDateString().split(" ");
+          date.shift();
+
+          const joinedDate = date.join(" ");
+          const flashed = ascent.attemptCount > 1;
           return (
             <Ascent>
-              <FirstColumn>
+              <LeftColumn>
                 <h1>{stringifyGrade(ascent.grade, ascent.routeType)}</h1>
-                <h2 className={ascent.attemptCount > 1 ? "non-flash" : "flash"}>
-                  {stringifyAttempts(ascent.attempts)}
-                </h2>
-              </FirstColumn>
+                <span>
+                  <Icon icon="lightning" className="lightning" size={16} />
+                  <h2 className={flashed ? "non-flash" : "flash"}>
+                    {stringifyAttempts(ascent.attempts)}
+                  </h2>
+                </span>
+              </LeftColumn>
+              <Divider />
+              <RightColumn>
+                <h3 className="name">{ascent.name}</h3>
+                <p>
+                  {ascent.location} - {`${ascent.angle}\u00B0`}
+                </p>
+                <p className="date">{joinedDate}</p>
+              </RightColumn>
             </Ascent>
           );
         })}
@@ -56,14 +73,14 @@ const ProfileAscents = (props: any) => {
           onClick={() => setSelectedTab("recent")}
           className={selectedTab === "recent" ? "active" : "inactive"}
         >
-          <TabName>Recent Ascents</TabName>
+          <TabName>Boulders</TabName>
           <Underline />
         </Tab>
         <Tab
           onClick={() => setSelectedTab("hardest")}
           className={selectedTab === "hardest" ? "active" : "inactive"}
         >
-          <TabName>Hardest Ascents</TabName>
+          <TabName>Routes</TabName>
           <Underline />
         </Tab>
       </TabRow>
@@ -81,6 +98,7 @@ const ProfileAscentsWrapper = styled(ColumnWrapper)`
 const TabRow = styled(RowWrapper)`
   column-gap: 20px;
   .active {
+    transition: background-color 300ms linear;
     background-color: ${(props) => props.theme.colors.highlight1};
 
     p {
@@ -88,6 +106,7 @@ const TabRow = styled(RowWrapper)`
     }
   }
   .inactive {
+    transition: background-color 300ms linear;
     :hover {
       background-color: ${(props) => props.theme.colors.highlight2};
     }
@@ -123,6 +142,9 @@ const Underline = styled.div``;
 
 const AscentsContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-top: 15px;
 `;
 
 const NoData = styled(ColumnWrapper)``;
@@ -131,12 +153,56 @@ const Ascent = styled(RowWrapper)`
   color: ${(props) => props.theme.colors.primaryWhite};
   background-color: ${(props) => props.theme.colors.highlight2};
   border-radius: ${(props) => props.theme.other.borderRadius};
-  padding: 15px;
+  padding: 10px 25px 10px 20px;
+  column-gap: 15px;
+  align-items: center;
+  transition: background-color 300ms linear;
+  cursor: pointer;
+  :hover {
+    background-color: ${(props) => props.theme.colors.highlight3};
+  }
 `;
 
-const FirstColumn = styled(ColumnWrapper)`
+const LeftColumn = styled(ColumnWrapper)`
+  height: 67px;
   align-items: center;
+  color: ${(props) => props.theme.colors.primaryWhite};
+  h1 {
+    font-size: 32px;
+  }
   .flash {
+    font-size: 20px;
     color: #0fa973;
+  }
+  .non-flash {
+  }
+  span {
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+  }
+  .lightning {
+    fill: #0fa973;
+  }
+`;
+
+const Divider = styled(ColumnWrapper)`
+  height: 65px;
+  width: 2px;
+  border-radius: 10px;
+  background-color: ${(props) => props.theme.colors.primaryWhite};
+`;
+
+const RightColumn = styled(ColumnWrapper)`
+  row-gap: 4px;
+  .name {
+    font-size: 22px;
+  }
+  p {
+    font-size: 14px;
+  }
+  .date {
+    margin-top: 2px;
+    font-size: 14px;
   }
 `;

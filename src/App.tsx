@@ -11,7 +11,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
-import Ascents from "./components/display/ascents/ascents";
+import Profile from "./components/display/ascents/profile";
 
 const theme = {
   colors: {
@@ -20,6 +20,7 @@ const theme = {
     secondaryBlack: "#141517",
     highlight1: "#0d9263",
     highlight2: "#303134",
+    highlight3: "#3c3d41",
     borderColor: "#919191",
   },
   fonts: {
@@ -64,7 +65,7 @@ const App = () => {
             <ContentWrapper>
               <NavBar />
               <Routes>
-                <Route path="/ascents" element={<Ascents />}></Route>
+                <Route path="/ascents" element={<Profile />}></Route>
                 <Route path="/search" element={<Display />}></Route>
               </Routes>
             </ContentWrapper>

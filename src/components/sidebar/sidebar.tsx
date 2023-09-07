@@ -148,7 +148,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
   }
   .unselected {
     :hover {
-      background-color: ${(props) => props.theme.colors.highlight2};
+      background-color: ${(props) => props.theme.colors.highlight3};
 
       p {
         color: white;
