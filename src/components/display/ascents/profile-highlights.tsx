@@ -27,7 +27,10 @@ const ProfileHighlights = (props: any) => {
       </HighlightWrapper>
       <HighlightWrapper>
         <Highlight>
-          <h1>{profile.bestAngle}</h1>
+          <h1>
+            {profile.bestAngle}
+            {"\u00b0"}
+          </h1>
         </Highlight>
         <h3>Best Angle</h3>
       </HighlightWrapper>
@@ -61,6 +64,7 @@ const Highlight = styled(RowWrapper)`
   align-items: center;
   justify-content: center;
   padding: 15px 25px;
+  font-size: 14px;
   background-color: ${(props) => props.theme.colors.highlight2};
   border-radius: ${(props) => props.theme.other.borderRadius};
 `;

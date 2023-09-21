@@ -19,6 +19,11 @@ const UserWrapper = styled.div`
   color: ${(props) => props.theme.colors.primaryWhite};
   padding: 0 10px;
   gap: 8px;
+  @media only screen and (max-width: 980px) {
+    p {
+      display: none;
+    }
+  }
 `;
 
 const AcctIcon = styled.div`

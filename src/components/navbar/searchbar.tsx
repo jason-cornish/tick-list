@@ -8,14 +8,6 @@ const SearchBar = (props: any) => {
 
   return (
     <SearchWrapper>
-      <ButtonWrapper>
-        <BackButton>
-          <StyledIcon title="Go Back" icon="chevron-left" size={20} />
-        </BackButton>
-        <BackButton>
-          <StyledIcon title="Go Forward" icon="chevron-right" size={20} />
-        </BackButton>
-      </ButtonWrapper>
       <SearchInput>
         <StyledIcon icon="search" size={15} />
         <input
@@ -24,13 +16,13 @@ const SearchBar = (props: any) => {
           }}
           placeholder="Search climbs or profiles..."
         />
-        {searchQuery.length >= 1 ? (
+        {/* {searchQuery.length >= 1 ? (
           <BackButton>
             <StyledIcon icon="cross" size={15} />
           </BackButton>
         ) : (
           <div></div>
-        )}
+        )} */}
       </SearchInput>
     </SearchWrapper>
   );
@@ -42,12 +34,9 @@ const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 15px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  @media only screen and (max-width: 980px) {
+    width: 100%;
+  }
 `;
 
 const SearchInput = styled.form`
@@ -61,6 +50,9 @@ const SearchInput = styled.form`
   color: #fff !important;
   padding: 5px 10px;
   width: 400px;
+  @media only screen and (max-width: 980px) {
+    width: 100%;
+  }
   height: 30px;
   &:focus-within {
     border: 1px solid ${(props) => props.theme.colors.primaryWhite};
@@ -85,14 +77,4 @@ const StyledIcon = styled(Icon)`
   fill: ${(props) => props.theme.colors.primaryWhite};
   display: flex;
   align-items: center;
-`;
-
-const BackButton = styled.button`
-  border: none;
-  background-color: ${(props) => props.theme.colors.highlight2};
-  padding: 5px;
-  border-radius: 999px;
-  &:hover {
-    cursor: pointer;
-  }
 `;

@@ -95,7 +95,9 @@ const Profile = () => {
     <ProfileWrapper>
       <ProfileInsights>
         <ProfileInfo profile={profile} />
-        <ProfileHighlights profile={profile} />
+        <DisplayConditional>
+          <ProfileHighlights profile={profile} />
+        </DisplayConditional>
       </ProfileInsights>
 
       <ProfileAscents profile={profile} />
@@ -107,12 +109,13 @@ export default Profile;
 
 const ProfileWrapper = styled.div`
   display: grid;
-  grid-template-columns: 450px 1fr;
+  grid-template-columns: 1fr;
   padding: 30px;
-  row-gap: 30px;
+  row-gap: 20px;
   column-gap: 60px;
   @media only screen and (max-width: 1200px) {
     grid-template-columns: 1fr;
+    padding: 15px;
   }
 `;
 
@@ -120,4 +123,16 @@ const ProfileInsights = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+  @media only screen and (max-width: 1200px) {
+    row-gap: 20px;
+  }
+`;
+
+const DisplayConditional = styled.div`
+  @media only screen and (min-width: 980px) {
+    display: none;
+  }
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;

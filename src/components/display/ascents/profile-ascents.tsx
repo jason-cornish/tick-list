@@ -2,6 +2,7 @@ import { Icon } from "@blueprintjs/core";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ColumnWrapper, RowWrapper } from "../../../reusable/styled-components";
+import SearchBar from "../../navbar/searchbar";
 
 const ProfileAscents = (props: any) => {
   const { profile } = props;
@@ -9,7 +10,7 @@ const ProfileAscents = (props: any) => {
   const [selectedTab, setSelectedTab] = useState("recent");
 
   const stringifyAttempts = (attemptCount: number) => {
-    return attemptCount === 1 ? "Flash" : `${attemptCount} Tries`;
+    return attemptCount === 1 ? "FLASH" : `${attemptCount} Tries`;
   };
 
   const stringifyGrade = (grade: number, routeType: string) => {
@@ -39,14 +40,19 @@ const ProfileAscents = (props: any) => {
           date.shift();
 
           const joinedDate = date.join(" ");
-          const flashed = ascent.attemptCount > 1;
+          const flashed = ascent.attempts === 1;
           return (
             <Ascent>
               <LeftColumn>
                 <h1>{stringifyGrade(ascent.grade, ascent.routeType)}</h1>
+
                 <span>
-                  <Icon icon="lightning" className="lightning" size={16} />
-                  <h2 className={flashed ? "non-flash" : "flash"}>
+                  {/* {flashed ? (
+                    <Icon icon="lightning" className="lightning" />
+                  ) : (
+                    <div />
+                  )} */}
+                  <h2 className={flashed ? "flash" : "non-flash"}>
                     {stringifyAttempts(ascent.attempts)}
                   </h2>
                 </span>
@@ -68,6 +74,9 @@ const ProfileAscents = (props: any) => {
 
   return (
     <ProfileAscentsWrapper>
+      <ControlsRow>
+        <SearchBar />
+      </ControlsRow>
       <TabRow>
         <Tab
           onClick={() => setSelectedTab("recent")}
@@ -93,6 +102,10 @@ export default ProfileAscents;
 
 const ProfileAscentsWrapper = styled(ColumnWrapper)`
   column-gap: 25px;
+`;
+
+const ControlsRow = styled(RowWrapper)`
+  column-gap: 10px;
 `;
 
 const TabRow = styled(RowWrapper)`
@@ -161,25 +174,29 @@ const Ascent = styled(RowWrapper)`
   :hover {
     background-color: ${(props) => props.theme.colors.highlight3};
   }
+  @media only screen and (max-width: 980px) {
+    width: 100%;
+  }
 `;
 
 const LeftColumn = styled(ColumnWrapper)`
-  height: 67px;
   align-items: center;
-  color: ${(props) => props.theme.colors.primaryWhite};
+  min-width: 60px;
   h1 {
-    font-size: 32px;
+    font-size: 26px;
   }
   .flash {
-    font-size: 20px;
+    font-size: 16px;
     color: #0fa973;
+    font-weight: 600;
   }
   .non-flash {
+    font-size: 16px;
+    color: ${(props) => props.theme.colors.primaryWhite};
   }
   span {
     display: flex;
     align-items: center;
-    column-gap: 2px;
   }
   .lightning {
     fill: #0fa973;
@@ -195,8 +212,10 @@ const Divider = styled(ColumnWrapper)`
 
 const RightColumn = styled(ColumnWrapper)`
   row-gap: 4px;
+  min-width: 180px;
+  margin-left: 5px;
   .name {
-    font-size: 22px;
+    font-size: 20px;
   }
   p {
     font-size: 14px;
