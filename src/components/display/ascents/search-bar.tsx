@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { Icon } from "@blueprintjs/core";
-import { DataContext } from "../../App";
 import React, { useContext } from "react";
 
-const SearchBar = (props: any) => {
-  const { searchQuery, setSearchQuery } = useContext(DataContext);
+type PropsTypes = {
+  setSelectedFilters: React.Dispatch<React.SetStateAction<any>>;
+  selectedFilters: object;
+};
+
+const SearchBar = (props: PropsTypes) => {
+  const { setSelectedFilters, selectedFilters } = props;
 
   return (
     <SearchWrapper>
@@ -12,9 +16,12 @@ const SearchBar = (props: any) => {
         <StyledIcon icon="search" size={15} />
         <input
           onChange={(event) => {
-            setSearchQuery(event.target.value);
+            setSelectedFilters({
+              ...selectedFilters,
+              name: event.target.value,
+            });
           }}
-          placeholder="Search climbs or profiles..."
+          placeholder="Filter by name..."
         />
         {/* {searchQuery.length >= 1 ? (
           <BackButton>
@@ -33,17 +40,19 @@ export default SearchBar;
 const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
+  font-family: Archivo;
   @media only screen and (max-width: 980px) {
     width: 100%;
   }
 `;
 
 const SearchInput = styled.form`
+  font-family: Archivo;
   display: flex;
   align-items: center;
   gap: 5px;
   background-color: ${(props) => props.theme.colors.highlight3};
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid transparent;
   color: #fff !important;
   padding: 5px 10px;
@@ -54,6 +63,7 @@ const SearchInput = styled.form`
   height: 30px;
   &:focus-within {
     border: 1px solid ${(props) => props.theme.colors.primaryWhite};
+    background-color: ${(props) => props.theme.colors.highlight4};
   }
   input {
     border: 0;

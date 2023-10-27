@@ -14,8 +14,6 @@ const Sidebar = (props: PropsType) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [buttonTimeout, setButtonTimeout] = useState(false);
 
-  console.log(selectedTab);
-
   const selectTab = (tab: string) => {
     setSelectedTab(tab);
   };
@@ -107,6 +105,7 @@ export default Sidebar;
 const Wrapper = styled.div`
   position: relative;
   background-color: ${(props) => props.theme.colors.primaryBlack};
+  border-right: 1px solid ${(props) => props.theme.colors.highlight3};
   border-radius: 5px;
   left: 0;
   padding: 0px 10px;
@@ -140,15 +139,15 @@ const SidebarWrapper = styled(ColumnWrapper)`
   .selected {
     background-color: ${(props) => props.theme.colors.highlight1};
     p {
-      color: white;
+      color: ${(props) => props.theme.colors.secondaryBlack};
     }
     span {
-      fill: white;
+      fill: ${(props) => props.theme.colors.secondaryBlack};
     }
   }
   .unselected {
     :hover {
-      background-color: ${(props) => props.theme.colors.highlight3};
+      background-color: ${(props) => props.theme.colors.highlight4};
 
       p {
         color: white;

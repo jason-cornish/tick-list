@@ -8,3 +8,9 @@ export const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const GreyText = styled.h3`
+  color: ${(props) => props.theme.colors.grey};
+  font-size: 20px;
+  margin: 0px;
+`;

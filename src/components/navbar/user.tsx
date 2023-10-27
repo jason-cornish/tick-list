@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import Button from "../../reusable/button";
+import { RowWrapper } from "../../reusable/styled-components";
 
 const User = () => {
   return (
     <UserWrapper>
-      <p>John Doe</p>
       <AcctIcon>
-        <h3>J</h3>
+        <h3>JC</h3>
       </AcctIcon>
     </UserWrapper>
   );
@@ -13,12 +14,11 @@ const User = () => {
 
 export default User;
 
-const UserWrapper = styled.div`
-  display: flex;
+const UserWrapper = styled(RowWrapper)`
   align-items: center;
+  justify-content: center;
   color: ${(props) => props.theme.colors.primaryWhite};
-  padding: 0 10px;
-  gap: 8px;
+  column-gap: 10px;
   @media only screen and (max-width: 980px) {
     p {
       display: none;
@@ -27,8 +27,7 @@ const UserWrapper = styled.div`
 `;
 
 const AcctIcon = styled.div`
-  width: 30px;
-  height: 30px;
+  padding: 7px;
   background-color: ${(props) => props.theme.colors.highlight1};
   border-radius: 3px;
   display: flex;
