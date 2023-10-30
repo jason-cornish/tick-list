@@ -6,6 +6,7 @@ import {
   GreyText,
   RowWrapper,
 } from "../../../reusable/styled-components";
+import ProfileAbout from "./profile-about";
 import ProfileHighlights from "./profile-highlights";
 
 const ProfileInfo = (props: any) => {
@@ -18,6 +19,7 @@ const ProfileInfo = (props: any) => {
         <ProfileName>
           <h1 id="profile">{profile.name}</h1>
         </ProfileName>
+        {/* <ProfileAbout profile={profile} /> */}
         <ProfileDetails>
           <ProfileDetail>
             <Icon icon="map-marker" size={20} />
@@ -31,15 +33,11 @@ const ProfileInfo = (props: any) => {
             <Icon icon="flag" size={20} />
             <p>Joined Dec 2018</p>
           </ProfileDetail>
-          {/* <ProfileDetail>
-          Climbing since {profile.joinYear} &#x2022; <Icon icon="map-marker" />
-          {profile.location} &#x2022; {profile.gender}
-        </ProfileDetail> */}
         </ProfileDetails>
 
-        <DisplayConditional>
-          {/* <ProfileHighlights profile={profile} /> */}
-        </DisplayConditional>
+        {/* <DisplayConditional>
+          <ProfileHighlights profile={profile} />
+        </DisplayConditional> */}
       </ProfileText>
     </ProfileInfoWrapper>
   );
@@ -55,6 +53,7 @@ const ProfileInfoWrapper = styled(RowWrapper)`
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: ${(props) => props.theme.other.borderRadius};
   position: relative;
+  justify-content: center;
 `;
 
 const AcctIcon = styled.div`
@@ -75,6 +74,7 @@ const AcctIcon = styled.div`
 
 const ProfileText = styled(ColumnWrapper)`
   row-gap: 9px;
+  justify-content: space-between;
   @media only screen and (max-width: 980px) {
     justify-content: normal;
     row-gap: 10px;
@@ -102,7 +102,7 @@ const ProfileName = styled(RowWrapper)`
 
 const ProfileDetails = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
   row-gap: 10px;
 `;
 

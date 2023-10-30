@@ -6,16 +6,11 @@ const ProfileAbout = (props: any) => {
   const { profile } = props;
   return (
     <ProfileAboutWrapper>
-      <GreyText>About</GreyText>
+      {/* <GreyText>About</GreyText> */}
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit
         velit, fugiat dolores nemo iste esse veniam laborum adipisci possimus.
         Eum et aspernatur debitis aut fugiat a alias suscipit saepe.
-      </p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta odit
-        neque laudantium deserunt recusandae, accusamus quas maxime aut in minus
-        perferendis velit dolor vel fugiat, dolorem sint facilis esse molestias.
       </p>
     </ProfileAboutWrapper>
   );
@@ -24,7 +19,7 @@ const ProfileAbout = (props: any) => {
 export default ProfileAbout;
 
 const ProfileAboutWrapper = styled(ColumnWrapper)`
-  padding: 20px;
+  /* padding: 20px; */
   font-family: ${(props) => props.theme.fonts.header};
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: ${(props) => props.theme.other.borderRadius};

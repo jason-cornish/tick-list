@@ -100,7 +100,6 @@ const ApplicationWrapper = styled.div`
   display: flex;
   column-gap: 15px;
   padding: 15px;
-  height: fill-available;
 `;
 
 const ContentWrapper = styled.div`
@@ -110,6 +109,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  overflow: auto;
 `;
 
 const GreyLayerWrapper = styled.div`

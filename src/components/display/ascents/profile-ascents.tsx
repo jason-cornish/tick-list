@@ -178,7 +178,7 @@ const ProfileAscents = (props: any) => {
           icon={<Icon icon="add" />}
           text="Log Ascent"
           onClick={() => openModal("filterModal")}
-          type="regular"
+          type="fancy"
         />
         <Button
           icon={<Icon icon="filter" />}

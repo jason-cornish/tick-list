@@ -106,9 +106,12 @@ const Profile = () => {
   return (
     <ProfileWrapper>
       <CenteredDiv>
-        <ProfileInfo profile={profile} />
         <ProfileInsights>
+          <ProfileInfo profile={profile} />
           <ProfileAbout profile={profile} />
+        </ProfileInsights>
+
+        <ProfileInsights>
           <ProfileHighlights profile={profile} />
         </ProfileInsights>
 
@@ -129,7 +132,7 @@ const ProfileWrapper = styled.div`
 const CenteredDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  max-width: 1300px;
+  /* max-width: 1300px; */
   row-gap: 15px;
   column-gap: 15px;
   @media only screen and (max-width: 1200px) {
@@ -148,8 +151,8 @@ const ProfileImage = styled.img`
 const ProfileInsights = styled.div`
   display: flex;
   flex-direction: row;
-  column-gap: 20px;
-  row-gap: 20px;
+  column-gap: 15px;
+  row-gap: 15px;
   @media only screen and (max-width: 1200px) {
     row-gap: 20px;
   }

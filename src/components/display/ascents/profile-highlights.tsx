@@ -35,7 +35,7 @@ const ProfileHighlights = (props: any) => {
       <HighlightWrapper>
         <Highlight>
           <h1>{profile.totalAscents}</h1>
-          <GreyText>Total Ascents</GreyText>
+          <GreyText>Ascents</GreyText>
         </Highlight>
       </HighlightWrapper>
       <HighlightWrapper>
