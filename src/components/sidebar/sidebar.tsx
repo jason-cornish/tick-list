@@ -93,9 +93,14 @@ export default Sidebar;
 const Wrapper = styled.div`
   position: relative;
   background-color: ${(props) => props.theme.colors.primaryBlack};
-  border-right: 1px solid ${(props) => props.theme.colors.highlight3};
+  border-right: 0px solid ${(props) => props.theme.colors.highlight3};
   border-radius: 5px;
+  box-shadow: inset -12px 0px 1px -11px rgba(204, 208, 217, 0.2);
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
   left: 0;
+  top: 71px;
+  max-height: calc(100% - 80px);
   padding: 0px 10px;
   box-sizing: border-box;
   .collapsed {
@@ -107,9 +112,11 @@ const Wrapper = styled.div`
   @media only screen and (max-width: 850px) {
     position: fixed;
     width: 100%;
+    top: auto;
     bottom: 0;
     z-index: 2;
-    background-color: ${(props) => props.theme.colors.secondaryBlack};
+    background-color: ${(props) => props.theme.colors.highlight3};
+    box-shadow: inset 0px 11px 1px -11px rgba(204, 208, 217, 1);
     .collapsed {
       width: 100%;
       flex-direction: row;
@@ -142,6 +149,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
   }
   .selected {
     background-color: ${(props) => props.theme.colors.highlight1};
+
     p {
       color: ${(props) => props.theme.colors.secondaryBlack};
     }

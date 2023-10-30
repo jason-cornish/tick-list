@@ -109,6 +109,11 @@ const Highlight = styled(RowWrapper)`
   align-items: center;
   justify-content: center;
   height: 120px;
+  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.1),
+    /* 2. shadow ring 👇 */ 0 0 0 1px hsla(230, 13%, 9%, 0.075),
+    /* 3. multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(230, 13%, 9%, 0.02),
+    0 0.9px 1.5px hsla(230, 13%, 9%, 0.045),
+    0 3.5px 6px hsla(230, 13%, 9%, 0.09);
   h1 {
     font-size: 35px;
     margin-top: -3px;

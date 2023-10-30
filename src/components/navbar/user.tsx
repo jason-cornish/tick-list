@@ -33,15 +33,21 @@ const UserWrapper = styled(RowWrapper)`
   h1 {
     font-size: 18px;
   }
-  @media only screen and (max-width: 980px) {
-    p {
-      display: none;
-    }
-  }
   .bp5-icon {
     margin-left: -5px;
     margin-top: 3px;
     fill: ${(props) => props.theme.colors.primaryWhite};
+  }
+  @media only screen and (max-width: 850px) {
+    height: 55px;
+    background-color: transparent;
+    border: 0px;
+    h1 {
+      display: none;
+    }
+    .bp5-icon {
+      /* display: none; */
+    }
   }
 `;
 
@@ -50,6 +56,10 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   height: 35px;
   width: 35px;
+  @media only screen and (max-width: 850px) {
+    height: 50px;
+    width: 50px;
+  }
 `;
 
 const AcctIcon = styled.div`

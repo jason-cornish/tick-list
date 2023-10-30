@@ -56,14 +56,14 @@ const SearchInput = styled.form`
   border: 1px solid transparent;
   color: #fff !important;
   padding: 5px 10px;
-  width: 400px;
+  width: 250px;
   @media only screen and (max-width: 980px) {
     width: 100%;
   }
   height: 30px;
   &:focus-within {
     border: 1px solid ${(props) => props.theme.colors.primaryWhite};
-    background-color: ${(props) => props.theme.colors.highlight4};
+    background-color: ${(props) => props.theme.colors.highlight3};
   }
   input {
     border: 0;

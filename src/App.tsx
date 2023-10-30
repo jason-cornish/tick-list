@@ -34,6 +34,8 @@ const theme = {
   },
   other: {
     borderRadius: "7px",
+    boxShadow:
+      "inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.1), 0 0 0 1px hsla(230, 13%, 9%, 0.075), 0 0.3px 0.4px hsla(230, 13%, 9%, 0.02), 0 0.9px 1.5px hsla(230, 13%, 9%, 0.045), 0 3.5px 6px hsla(230, 13%, 9%, 0.09)",
   },
 };
 
@@ -73,14 +75,13 @@ const App = () => {
           <GreyLayerWrapper>
             <div className={showGreyLayer ? "visible" : "invisible"} />
           </GreyLayerWrapper>
+          <NavBar />
           <ApplicationWrapper>
             <Sidebar
               setSelectedTab={setSelectedTab}
               selectedTab={selectedTab}
             />
-
             <ContentWrapper>
-              <NavBar />
               <Routes>
                 <Route path="/ascents" element={<Profile />}></Route>
                 <Route path="/search" element={<Display />}></Route>
@@ -99,17 +100,19 @@ const ApplicationWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.secondaryBlack};
   display: flex;
   column-gap: 15px;
-  padding: 15px;
   height: fill-available;
 `;
 
 const ContentWrapper = styled.div`
   width: 100%;
   height: fill-available;
+  max-height: 100%;
+  overflow-y: auto;
   /* background-color: ${(props) => props.theme.colors.primaryBlack}; */
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  padding-top: 70px;
   @media only screen and (max-width: 850px) {
   }
 `;
@@ -118,7 +121,7 @@ const GreyLayerWrapper = styled.div`
   .visible {
     display: flex;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     background-color: black;
     opacity: 45%;
     width: 100%;

@@ -128,9 +128,24 @@ const ProfileWrapper = styled.div`
   justify-content: center;
   padding-top: 15px;
   @media only screen and (max-width: 850px) {
-    padding: 0px;
+    padding: 15px;
   }
 `;
+
+// const ProfileImage = styled.div`
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+//   .profileImg {
+//     width: 170px;
+//     height: 170px;
+//   }
+//   @media only screen and (max-width: 980px) {
+//     width: 100px;
+//     height: 100px;
+//   }
+// `;
 
 const CenteredDiv = styled.div`
   display: grid;

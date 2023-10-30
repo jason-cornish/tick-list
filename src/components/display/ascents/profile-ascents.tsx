@@ -131,12 +131,7 @@ const ProfileAscents = (props: any) => {
                 <p className="date">{joinedDate}</p>
               </RightColumn>
               <OptionsWrapper>
-                <Button
-                  icon={<Icon icon="more" />}
-                  text={false}
-                  onClick={() => openModal("filterModal")}
-                  type="regular"
-                />
+                <Icon icon="more" size={22} />
               </OptionsWrapper>
             </Ascent>
           );
@@ -179,15 +174,15 @@ const ProfileAscents = (props: any) => {
       <ControlsRow>
         <GreyText style={{ marginBottom: "20px" }}>Ascents</GreyText>
         <RowWrapper>
-          <SearchBar
-            selectedFilters={selectedFilters}
-            setSelectedFilters={setSelectedFilters}
-          />
           <Button
             icon={<Icon icon="filter" />}
             text="Filter Ascents"
             onClick={() => openModal("filterModal")}
             type="regular"
+          />
+          <SearchBar
+            selectedFilters={selectedFilters}
+            setSelectedFilters={setSelectedFilters}
           />
         </RowWrapper>
 
@@ -254,6 +249,7 @@ const ProfileAscentsWrapper = styled(ColumnWrapper)`
   padding: 20px;
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: ${(props) => props.theme.other.borderRadius};
+  box-shadow: ${(props) => props.theme.other.boxShadow};
 `;
 
 const ControlsRow = styled(RowWrapper)`
@@ -331,7 +327,8 @@ const AscentsContainer = styled.div`
     background-color: ${(props) => props.theme.colors.highlight4};
   }
   .unselected {
-    border: 2px solid ${(props) => props.theme.colors.highlight3};
+    box-shadow: ${(props) => props.theme.other.boxShadow};
+    border: 2px solid transparent;
     background-color: ${(props) => props.theme.colors.highlight3};
     :hover {
       background-color: ${(props) => props.theme.colors.highlight4};
@@ -342,13 +339,21 @@ const AscentsContainer = styled.div`
 
 const OptionsWrapper = styled(RowWrapper)`
   position: absolute;
-  right: 5px;
+  right: 10px;
   align-items: center;
   justify-content: center;
   border-radius: ${(props) => props.theme.other.borderRadius};
-  transform: rotate(90deg);
+  /* transform: rotate(90deg); */
   cursor: pointer;
   z-index: 2;
+  padding: 10px;
+  background-color: ${(props) => props.theme.colors.highlight3};
+  .bp5-icon {
+    fill: ${(props) => props.theme.colors.primaryWhite};
+  }
+  :hover {
+    background-color: ${(props) => props.theme.colors.secondaryBlack};
+  }
 `;
 
 const NoData = styled(ColumnWrapper)``;
@@ -358,6 +363,7 @@ const Ascent = styled(RowWrapper)<AscentProps>`
   color: ${(props) => props.theme.colors.primaryWhite};
   /* background-color: ${(props) => props.theme.colors.highlight3}; */
   border-radius: ${(props) => props.theme.other.borderRadius};
+  border: 0px;
   padding: 10px 25px 10px 20px;
   column-gap: 15px;
   align-items: center;

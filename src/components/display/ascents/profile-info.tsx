@@ -14,38 +14,41 @@ const ProfileInfo = (props: any) => {
 
   return (
     <ProfileInfoWrapper>
-      {profile.profileImage}
-      <RowWrapper className="row">
-        <ProfileText>
-          {/* <GreyText>User Profile</GreyText> */}
-          <ProfileName>
-            <h1 id="profile">{profile.name}</h1>
-          </ProfileName>
-          <ProfileDetails>
-            <ProfileDetail>
-              <span>@</span>
-              <p>jason_cornish</p>
-            </ProfileDetail>
-            <ProfileDetail>
-              <Icon icon="map-marker" size={20} />
-              <p>He/Him</p>
-            </ProfileDetail>
-            <ProfileDetail>
-              <Icon icon="map-marker" size={20} />
-              <p>Austin, TX</p>
-            </ProfileDetail>
-            <ProfileDetail>
-              <Icon icon="flag" size={20} />
-              <p>Joined Dec 2018</p>
-            </ProfileDetail>
-          </ProfileDetails>
-          <ProfileAbout profile={profile} />
+      <WideWrapper>
+        {profile.profileImage}
+        <RowWrapper className="row">
+          <ProfileText>
+            {/* <GreyText>User Profile</GreyText> */}
+            <ProfileName>
+              <h1 id="profile">{profile.name}</h1>
+            </ProfileName>
+            <ProfileDetails>
+              <ProfileDetail>
+                <span>@</span>
+                <p>jason_cornish</p>
+              </ProfileDetail>
+              <ProfileDetail>
+                <Icon icon="map-marker" size={20} />
+                <p>He/Him</p>
+              </ProfileDetail>
+              <ProfileDetail>
+                <Icon icon="map-marker" size={20} />
+                <p>Austin, TX</p>
+              </ProfileDetail>
+              <ProfileDetail>
+                <Icon icon="flag" size={20} />
+                <p>Joined Dec 2018</p>
+              </ProfileDetail>
+            </ProfileDetails>
+            <ProfileAbout profile={profile} />
 
-          {/* <DisplayConditional>
+            {/* <DisplayConditional>
           <ProfileHighlights profile={profile} />
         </DisplayConditional> */}
-        </ProfileText>
-      </RowWrapper>
+          </ProfileText>
+        </RowWrapper>
+      </WideWrapper>
+      <MobileWrapper></MobileWrapper>
     </ProfileInfoWrapper>
   );
 };
@@ -54,7 +57,7 @@ export default ProfileInfo;
 
 const ProfileInfoWrapper = styled(RowWrapper)`
   color: ${(props) => props.theme.colors.primaryWhite};
-  column-gap: 30px;
+
   padding: 20px;
   width: 100%;
   font-family: ${(props) => props.theme.fonts.header};
@@ -62,6 +65,11 @@ const ProfileInfoWrapper = styled(RowWrapper)`
   border-radius: ${(props) => props.theme.other.borderRadius};
   position: relative;
   min-width: 600px;
+`;
+
+const WideWrapper = styled(RowWrapper)`
+  column-gap: 30px;
+  border-radius: ${(props) => props.theme.other.borderRadius};
   .row {
     column-gap: 20px;
   }
@@ -70,23 +78,14 @@ const ProfileInfoWrapper = styled(RowWrapper)`
     height: 170px;
     flex-shrink: 0;
     border-radius: ${(props) => props.theme.other.borderRadius};
+    @media only screen and (max-width: 850px) {
+      width: 100px;
+      height: 100px;
+    }
   }
 `;
 
-const AcctIcon = styled.div`
-  background-color: ${(props) => props.theme.colors.highlight1};
-  border-radius: ${(props) => props.theme.other.borderRadius};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${(props) => props.theme.colors.primaryBlack};
-  font-size: 26px;
-
-  @media only screen and (max-width: 980px) {
-    width: 100px;
-    height: 100px;
-  }
-`;
+const MobileWrapper = styled(ColumnWrapper)``;
 
 const ProfileText = styled(ColumnWrapper)`
   row-gap: 5px;
