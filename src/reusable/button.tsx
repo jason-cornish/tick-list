@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { RowWrapper } from "./styled-components";
 
 type PropsType = {
-  text: string;
+  text: string | boolean;
   icon: any;
   onClick: any;
   type: string;
@@ -15,12 +15,12 @@ const Button = (props: PropsType) => {
   return type === "regular" ? (
     <RegularButtonWrapper onClick={onClick} key="regular">
       {icon}
-      <p>{text}</p>
+      {text ? <p>{text}</p> : <></>}
     </RegularButtonWrapper>
   ) : (
     <FancyButtonWrapper onClick={onClick} key="fancy">
       {icon}
-      <p>{text}</p>
+      {text ? <p>{text}</p> : <></>}
     </FancyButtonWrapper>
   );
 };
@@ -30,7 +30,7 @@ export default Button;
 const RegularButtonWrapper = styled(RowWrapper)`
   align-items: center;
   justify-content: center;
-  column-gap: 5px;
+  column-gap: 10px;
   border-radius: ${(props) => props.theme.other.borderRadius};
   /* border: 2px solid ${(props) => props.theme.colors.primaryWhite}; */
   padding: 3px 15px;
@@ -53,19 +53,21 @@ const RegularButtonWrapper = styled(RowWrapper)`
 const FancyButtonWrapper = styled(RowWrapper)`
   align-items: center;
   justify-content: center;
-  column-gap: 5px;
+  height: 42px;
+  column-gap: 15px;
   border-radius: ${(props) => props.theme.other.borderRadius};
   /* border: 2px solid ${(props) => props.theme.colors.primaryWhite}; */
-  padding: 10px 20px;
+  padding: 0px 15px;
   background-color: ${(props) => props.theme.colors.highlight1};
   transition: background-color 0.3s ease-in-out;
   cursor: pointer;
   p {
     margin: 0px;
-    color: ${(props) => props.theme.colors.primaryBlack} !important;
+    color: ${(props) => props.theme.colors.secondaryBlack} !important;
+    font-size: 18px;
   }
   svg {
-    fill: ${(props) => props.theme.colors.primaryBlack};
+    fill: ${(props) => props.theme.colors.secondaryBlack};
     padding-top: 3px;
   }
   :hover {

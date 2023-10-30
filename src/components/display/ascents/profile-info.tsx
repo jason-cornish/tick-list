@@ -14,31 +14,38 @@ const ProfileInfo = (props: any) => {
 
   return (
     <ProfileInfoWrapper>
-      <AcctIcon>{profile.profileImage}</AcctIcon>
-      <ProfileText>
-        <ProfileName>
-          <h1 id="profile">{profile.name}</h1>
-        </ProfileName>
-        {/* <ProfileAbout profile={profile} /> */}
-        <ProfileDetails>
-          <ProfileDetail>
-            <Icon icon="map-marker" size={20} />
-            <p>He/Him</p>
-          </ProfileDetail>
-          <ProfileDetail>
-            <Icon icon="map-marker" size={20} />
-            <p>Austin, TX</p>
-          </ProfileDetail>
-          <ProfileDetail>
-            <Icon icon="flag" size={20} />
-            <p>Joined Dec 2018</p>
-          </ProfileDetail>
-        </ProfileDetails>
+      {profile.profileImage}
+      <RowWrapper className="row">
+        <ProfileText>
+          {/* <GreyText>User Profile</GreyText> */}
+          <ProfileName>
+            <h1 id="profile">{profile.name}</h1>
+          </ProfileName>
+          <ProfileDetails>
+            <ProfileDetail>
+              <span>@</span>
+              <p>jason_cornish</p>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Icon icon="map-marker" size={20} />
+              <p>He/Him</p>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Icon icon="map-marker" size={20} />
+              <p>Austin, TX</p>
+            </ProfileDetail>
+            <ProfileDetail>
+              <Icon icon="flag" size={20} />
+              <p>Joined Dec 2018</p>
+            </ProfileDetail>
+          </ProfileDetails>
+          <ProfileAbout profile={profile} />
 
-        {/* <DisplayConditional>
+          {/* <DisplayConditional>
           <ProfileHighlights profile={profile} />
         </DisplayConditional> */}
-      </ProfileText>
+        </ProfileText>
+      </RowWrapper>
     </ProfileInfoWrapper>
   );
 };
@@ -49,16 +56,24 @@ const ProfileInfoWrapper = styled(RowWrapper)`
   color: ${(props) => props.theme.colors.primaryWhite};
   column-gap: 30px;
   padding: 20px;
+  width: 100%;
   font-family: ${(props) => props.theme.fonts.header};
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: ${(props) => props.theme.other.borderRadius};
   position: relative;
-  justify-content: center;
+  min-width: 600px;
+  .row {
+    column-gap: 20px;
+  }
+  .profileImg {
+    width: 170px;
+    height: 170px;
+    flex-shrink: 0;
+    border-radius: ${(props) => props.theme.other.borderRadius};
+  }
 `;
 
 const AcctIcon = styled.div`
-  width: 170px;
-  height: 170px;
   background-color: ${(props) => props.theme.colors.highlight1};
   border-radius: ${(props) => props.theme.other.borderRadius};
   display: flex;
@@ -66,6 +81,7 @@ const AcctIcon = styled.div`
   align-items: center;
   color: ${(props) => props.theme.colors.primaryBlack};
   font-size: 26px;
+
   @media only screen and (max-width: 980px) {
     width: 100px;
     height: 100px;
@@ -73,8 +89,7 @@ const AcctIcon = styled.div`
 `;
 
 const ProfileText = styled(ColumnWrapper)`
-  row-gap: 9px;
-  justify-content: space-between;
+  row-gap: 5px;
   @media only screen and (max-width: 980px) {
     justify-content: normal;
     row-gap: 10px;
@@ -83,6 +98,7 @@ const ProfileText = styled(ColumnWrapper)`
   #profile {
     font-size: 35px;
     font-weight: 500;
+    margin-bottom: 5px;
   }
   span {
     font-size: 14px;
@@ -101,21 +117,29 @@ const ProfileName = styled(RowWrapper)`
 `;
 
 const ProfileDetails = styled.div`
-  display: grid;
-  grid-template-columns: auto auto;
-  row-gap: 10px;
+  display: flex;
+  column-gap: 30px;
 `;
 
 const ProfileDetail = styled(RowWrapper)`
+  position: relative;
   align-items: center;
   font-size: 16px;
-  column-gap: 10px;
+  column-gap: 5px;
+  box-sizing: border-box;
+  span {
+    font-weight: bold;
+    color: ${(props) => props.theme.colors.grey};
+    font-size: 18px;
+    top: -10px;
+  }
   p {
     font-family: Archivo;
     margin-bottom: 5px;
+    color: ${(props) => props.theme.colors.grey};
   }
   .bp5-icon {
-    fill: ${(props) => props.theme.colors.primaryWhite};
+    fill: ${(props) => props.theme.colors.grey};
     margin-right: 2px;
   }
 `;

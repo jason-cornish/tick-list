@@ -10,7 +10,7 @@ import ProfileAbout from "./profile-about";
 const Profile = () => {
   const [profile, setProfile] = useState({
     icon: "JC",
-    profileImage: <ProfileImage src={JasonCompressed}></ProfileImage>,
+    profileImage: <ProfileImage src={JasonCompressed} className="profileImg" />,
     name: "Jason Cornish",
     gender: "He/Him",
     location: "Austin, TX",
@@ -108,7 +108,7 @@ const Profile = () => {
       <CenteredDiv>
         <ProfileInsights>
           <ProfileInfo profile={profile} />
-          <ProfileAbout profile={profile} />
+          {/* <ProfileAbout profile={profile} /> */}
         </ProfileInsights>
 
         <ProfileInsights>
@@ -127,17 +127,19 @@ const ProfileWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 15px;
+  @media only screen and (max-width: 850px) {
+    padding: 0px;
+  }
 `;
 
 const CenteredDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  /* max-width: 1300px; */
+  max-width: 1200px;
   row-gap: 15px;
   column-gap: 15px;
   @media only screen and (max-width: 1200px) {
     grid-template-columns: 1fr;
-    padding: 15px;
   }
 `;
 

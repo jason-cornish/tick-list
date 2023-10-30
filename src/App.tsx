@@ -20,7 +20,7 @@ const theme = {
     secondaryBlack: "#1d2027",
     darkestBlack: "#0e0e0f",
     highlight1: "#00c07d",
-    grey: "#8992a7",
+    grey: "#a0a7b8",
     // highlight1: "#0d9263",
     // highlight1: "#00d68b",
     highlight2: "#303134",
@@ -100,6 +100,7 @@ const ApplicationWrapper = styled.div`
   display: flex;
   column-gap: 15px;
   padding: 15px;
+  height: fill-available;
 `;
 
 const ContentWrapper = styled.div`
@@ -109,7 +110,8 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  overflow: auto;
+  @media only screen and (max-width: 850px) {
+  }
 `;
 
 const GreyLayerWrapper = styled.div`

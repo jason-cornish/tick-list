@@ -34,7 +34,7 @@ const SidebarOption = (props: PropsTypes) => {
         onClick={content.onClick}
       >
         {content.icon}
-        {renderSwitch(content.label)}
+        {content.label}
       </SidebarOptionWrapper>
     </Link>
   );
@@ -54,7 +54,11 @@ const SidebarOptionWrapper = styled.div`
   column-gap: 15px;
   grid-template-columns: 22px 100%;
   transition: background-color 300ms linear;
-
+  @media only screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 25px;
+  }
   span {
     transition: fill 300ms linear;
     height: 22px;

@@ -130,6 +130,14 @@ const ProfileAscents = (props: any) => {
                 </p>
                 <p className="date">{joinedDate}</p>
               </RightColumn>
+              <OptionsWrapper>
+                <Button
+                  icon={<Icon icon="more" />}
+                  text={false}
+                  onClick={() => openModal("filterModal")}
+                  type="regular"
+                />
+              </OptionsWrapper>
             </Ascent>
           );
         })}
@@ -170,38 +178,42 @@ const ProfileAscents = (props: any) => {
 
       <ControlsRow>
         <GreyText style={{ marginBottom: "20px" }}>Ascents</GreyText>
-        <SearchBar
-          selectedFilters={selectedFilters}
-          setSelectedFilters={setSelectedFilters}
-        />
-        <Button
+        <RowWrapper>
+          <SearchBar
+            selectedFilters={selectedFilters}
+            setSelectedFilters={setSelectedFilters}
+          />
+          <Button
+            icon={<Icon icon="filter" />}
+            text="Filter Ascents"
+            onClick={() => openModal("filterModal")}
+            type="regular"
+          />
+        </RowWrapper>
+
+        {/* <Button
           icon={<Icon icon="add" />}
           text="Log Ascent"
           onClick={() => openModal("filterModal")}
           type="fancy"
-        />
-        <Button
-          icon={<Icon icon="filter" />}
-          text="Filter Ascents"
-          onClick={() => openModal("filterModal")}
-          type="regular"
-        />
+        /> */}
+
         {/* <Button
           icon={<Icon icon="edit" />}
           text="Edit"
           onClick={editSelected}
           type="regular"
         /> */}
-        <Button
+        {/* <Button
           icon={<Icon icon="trash" />}
           text="Delete Ascents"
           onClick={() => openModal("deleteModal")}
           type="regular"
-        />
+        /> */}
       </ControlsRow>
 
       <SelectorWrapper>
-        <TabRow>
+        {/* <TabRow>
           <Tab
             onClick={() => {
               setSelectedAscents([]);
@@ -225,7 +237,7 @@ const ProfileAscents = (props: any) => {
             <TabName>Routes</TabName>
           </Tab>
         </TabRow>
-        <Seperator />
+        <Seperator /> */}
         <AscentsContainer>{renderAscents()}</AscentsContainer>
       </SelectorWrapper>
     </ProfileAscentsWrapper>
@@ -247,7 +259,7 @@ const ProfileAscentsWrapper = styled(ColumnWrapper)`
 const ControlsRow = styled(RowWrapper)`
   column-gap: 10px;
   margin-bottom: 20px;
-  height: 40px;
+  justify-content: space-between;
 `;
 
 const Seperator = styled.div`
@@ -323,13 +335,26 @@ const AscentsContainer = styled.div`
     background-color: ${(props) => props.theme.colors.highlight3};
     :hover {
       background-color: ${(props) => props.theme.colors.highlight4};
+      border: 2px solid ${(props) => props.theme.colors.highlight4};
     }
   }
+`;
+
+const OptionsWrapper = styled(RowWrapper)`
+  position: absolute;
+  right: 5px;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${(props) => props.theme.other.borderRadius};
+  transform: rotate(90deg);
+  cursor: pointer;
+  z-index: 2;
 `;
 
 const NoData = styled(ColumnWrapper)``;
 
 const Ascent = styled(RowWrapper)<AscentProps>`
+  position: relative;
   color: ${(props) => props.theme.colors.primaryWhite};
   /* background-color: ${(props) => props.theme.colors.highlight3}; */
   border-radius: ${(props) => props.theme.other.borderRadius};
@@ -350,9 +375,9 @@ const Ascent = styled(RowWrapper)<AscentProps>`
     }
   }
 
-  @media only screen and (max-width: 980px) {
+  /* @media only screen and (max-width: 980px) {
     width: 100%;
-  }
+  } */
 `;
 
 const LeftColumn = styled(ColumnWrapper)`
@@ -388,7 +413,7 @@ const Divider = styled(ColumnWrapper)`
 
 const RightColumn = styled(ColumnWrapper)`
   row-gap: 4px;
-  min-width: 180px;
+  min-width: 220px;
   margin-left: 5px;
   .name {
     font-size: 20px;

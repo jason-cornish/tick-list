@@ -24,13 +24,13 @@ const ProfileAboutWrapper = styled(ColumnWrapper)`
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: ${(props) => props.theme.other.borderRadius};
   row-gap: 20px;
-  max-width: 50%;
+  max-width: 800px;
   .tabTitle {
     color: ${(props) => props.theme.colors.grey};
-    font-size: 18px;
+    font-size: 20px;
   }
   p {
     color: ${(props) => props.theme.colors.primaryWhite};
-    font-size: 20px;
+    font-size: 19px;
   }
 `;

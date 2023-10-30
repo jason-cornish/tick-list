@@ -24,27 +24,12 @@ const Sidebar = (props: PropsType) => {
 
   const sidebarRows = [
     {
-      icon: <StyledIcon icon="mountain" size={35} />,
-      onClick: () => selectTab("logo"),
-      label: <h1>Tick-List</h1>,
-      id: "logo",
-      selected: isTabSelected("logo"),
-    },
-    {
       icon: <StyledIcon icon="home" size={22} />,
       onClick: () => selectTab("home"),
       label: <p>Home</p>,
       id: "home",
       selected: isTabSelected("home"),
       link: "/home",
-    },
-    {
-      icon: <StyledIcon icon="person" size={22} />,
-      onClick: () => selectTab("ascents"),
-      label: <p>My Ascents</p>,
-      id: "ascents",
-      selected: isTabSelected("ascents"),
-      link: "/ascents",
     },
     {
       icon: <StyledIcon icon="search" size={22} />,
@@ -55,20 +40,21 @@ const Sidebar = (props: PropsType) => {
       link: "/search",
     },
     {
+      icon: <StyledIcon icon="person" size={22} />,
+      onClick: () => selectTab("ascents"),
+      label: <p>Ascents</p>,
+      id: "ascents",
+      selected: isTabSelected("ascents"),
+      link: "/ascents",
+    },
+
+    {
       icon: <StyledIcon icon="dashboard" size={22} />,
       onClick: () => selectTab("kpi"),
       label: <p>My KPI</p>,
       id: "kpi",
       selected: isTabSelected("kpi"),
       link: "/kpi",
-    },
-    {
-      icon: <StyledIcon icon="add" size={22} />,
-      onClick: () => selectTab("add"),
-      label: <p>Log Ascent</p>,
-      id: "add",
-      selected: isTabSelected("add"),
-      link: "/add",
     },
   ];
 
@@ -94,7 +80,9 @@ const Sidebar = (props: PropsType) => {
             />
           );
         })}
-        <button onClick={handleCollapseExpand}>Collap</button>
+        <button onClick={handleCollapseExpand} className="collapseButton">
+          Collap
+        </button>
       </SidebarWrapper>
     </Wrapper>
   );
@@ -116,6 +104,21 @@ const Wrapper = styled.div`
   .expanded {
     width: 170px;
   }
+  @media only screen and (max-width: 850px) {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 2;
+    background-color: ${(props) => props.theme.colors.secondaryBlack};
+    .collapsed {
+      width: 100%;
+      flex-direction: row;
+    }
+    .expanded {
+      width: 100%;
+      flex-direction: row;
+    }
+  }
 `;
 
 const StyledIcon = styled(Icon)`
@@ -131,6 +134,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
   align-items: center;
   row-gap: 10px;
   box-sizing: border-box;
+
   button {
     width: 50px;
     height: 40px;
@@ -159,6 +163,9 @@ const SidebarWrapper = styled(ColumnWrapper)`
   }
   .collapsed {
     column-gap: 0px !important;
+    p {
+      display: none;
+    }
   }
   #logo {
     column-gap: 10px;
@@ -168,6 +175,33 @@ const SidebarWrapper = styled(ColumnWrapper)`
       margin-top: -5px;
       height: 30px !important;
       width: 25px !important;
+    }
+  }
+  @media only screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    .collapseButton {
+      display: none;
+    }
+    .expanded {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+    }
+    .collapsed {
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
+      p {
+        display: flex;
+      }
+    }
+    #logo {
+      display: none;
+      position: absolute;
+      flex: 0 0 100%;
     }
   }
 `;
