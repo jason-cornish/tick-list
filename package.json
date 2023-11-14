@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/styled-components": "^5.1.26",
     "firebase-tools": "^12.4.6",
-    "highcharts": "^11.1.0",
+    "highcharts": "^11.2.0",
     "highcharts-react-official": "^3.2.1",
     "nodemon": "^2.0.22",
     "react": "^18.2.0",

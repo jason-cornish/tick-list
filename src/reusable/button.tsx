@@ -7,20 +7,23 @@ type PropsType = {
   icon: any;
   onClick: any;
   type: string;
+  children?: any;
 };
 
 const Button = (props: PropsType) => {
-  const { text, icon, onClick, type } = props;
+  const { text, icon, onClick, type, children } = props;
 
   return type === "regular" ? (
     <RegularButtonWrapper onClick={onClick} key="regular">
       {icon}
       {text ? <p>{text}</p> : <></>}
+      {children ? children : <div />}
     </RegularButtonWrapper>
   ) : (
     <FancyButtonWrapper onClick={onClick} key="fancy">
       {icon}
       {text ? <p>{text}</p> : <></>}
+      {children ? children : <div />}
     </FancyButtonWrapper>
   );
 };
@@ -28,14 +31,18 @@ const Button = (props: PropsType) => {
 export default Button;
 
 const RegularButtonWrapper = styled(RowWrapper)`
+  position: relative;
   align-items: center;
   justify-content: center;
-  column-gap: 10px;
   border-radius: ${(props) => props.theme.other.borderRadius};
   /* border: 2px solid ${(props) => props.theme.colors.primaryWhite}; */
-  padding: 3px 15px;
+  padding: 0px 15px;
+  height: 40px;
   background-color: ${(props) => props.theme.colors.highlight3};
   transition: background-color 0.3s ease-in-out;
+  .dropdown {
+    bottom: 0px;
+  }
   cursor: pointer;
   p {
     margin: 0px;
@@ -53,8 +60,8 @@ const RegularButtonWrapper = styled(RowWrapper)`
 const FancyButtonWrapper = styled(RowWrapper)`
   align-items: center;
   justify-content: center;
-  height: 42px;
-  column-gap: 15px;
+  height: 40px;
+  column-gap: 10px;
   border-radius: ${(props) => props.theme.other.borderRadius};
   /* border: 2px solid ${(props) => props.theme.colors.primaryWhite}; */
   padding: 0px 15px;
@@ -64,7 +71,6 @@ const FancyButtonWrapper = styled(RowWrapper)`
   p {
     margin: 0px;
     color: ${(props) => props.theme.colors.secondaryBlack} !important;
-    font-size: 18px;
   }
   svg {
     fill: ${(props) => props.theme.colors.secondaryBlack};

@@ -12,6 +12,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Profile from "./components/display/ascents/profile";
+import Home from "./components/display/home/home";
 
 const theme = {
   colors: {
@@ -20,12 +21,15 @@ const theme = {
     secondaryBlack: "#1d2027",
     darkestBlack: "#0e0e0f",
     highlight1: "#00c07d",
+    lightHighlight1: "#eafff7",
     grey: "#a0a7b8",
+    greyDarker: "#808593",
     // highlight1: "#0d9263",
     // highlight1: "#00d68b",
     highlight2: "#303134",
     highlight3: "#2e323e",
     highlight4: "#363c49",
+    hightlight5: "#5a6479",
     borderColor: "#919191",
   },
   fonts: {
@@ -69,6 +73,7 @@ const App = () => {
           loading,
           showGreyLayer,
           setShowGreyLayer,
+          theme,
         }}
       >
         <ThemeProvider theme={theme}>
@@ -83,6 +88,7 @@ const App = () => {
             />
             <ContentWrapper>
               <Routes>
+                <Route path="/home" element={<Home />}></Route>
                 <Route path="/ascents" element={<Profile />}></Route>
                 <Route path="/search" element={<Display />}></Route>
               </Routes>
@@ -99,7 +105,6 @@ export default App;
 const ApplicationWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.secondaryBlack};
   display: flex;
-  column-gap: 15px;
   height: fill-available;
 `;
 
@@ -122,8 +127,8 @@ const GreyLayerWrapper = styled.div`
     display: flex;
     position: absolute;
     z-index: 3;
-    background-color: black;
-    opacity: 45%;
+    background-color: #1a1f2a;
+    opacity: 50%;
     width: 100%;
     height: 100%;
     margin: 0px;
@@ -134,7 +139,7 @@ const GreyLayerWrapper = styled.div`
       }
 
       100% {
-        opacity: 45%;
+        opacity: 50%;
       }
     }
   }

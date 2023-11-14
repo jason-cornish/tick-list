@@ -57,7 +57,7 @@ const SidebarOptionWrapper = styled.div`
   @media only screen and (max-width: 850px) {
     display: flex;
     flex-direction: row;
-    padding: 10px 25px;
+    padding: 5px 10px;
   }
   span {
     transition: fill 300ms linear;

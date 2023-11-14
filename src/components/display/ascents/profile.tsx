@@ -22,7 +22,7 @@ const Profile = () => {
     ascents: [
       {
         name: "Sophies Problem",
-        routeType: "boulder",
+        routeType: "boulders",
         grade: 8,
         attempts: 3,
         date: 1693516428,
@@ -32,7 +32,7 @@ const Profile = () => {
       },
       {
         name: "Red Route",
-        routeType: "route",
+        routeType: "Routes",
         grade: "11a",
         attempts: 3,
         date: 1693516428,
@@ -42,7 +42,7 @@ const Profile = () => {
       },
       {
         name: "Jonah's Problem",
-        routeType: "boulder",
+        routeType: "Boulders",
         grade: 7,
         attempts: 2,
         date: 1693516428,
@@ -52,7 +52,7 @@ const Profile = () => {
       },
       {
         name: "Tom Eatz Brickz",
-        routeType: "boulder",
+        routeType: "Boulders",
         grade: 7,
         attempts: 1,
         date: 1693516428,
@@ -62,7 +62,7 @@ const Profile = () => {
       },
       {
         name: "Sophies Problem",
-        routeType: "boulder",
+        routeType: "Boulders",
         grade: 7,
         attempts: 1,
         date: 1693516428,
@@ -72,7 +72,7 @@ const Profile = () => {
       },
       {
         name: "Sophies Problem",
-        routeType: "boulder",
+        routeType: "Boulders",
         grade: 7,
         attempts: 1,
         date: 1693516428,
@@ -82,7 +82,7 @@ const Profile = () => {
       },
       {
         name: "Sophies Problem",
-        routeType: "boulder",
+        routeType: "Boulders",
         grade: 7,
         attempts: 1,
         date: 1693516428,
@@ -92,7 +92,7 @@ const Profile = () => {
       },
       {
         name: "Sophies Problem",
-        routeType: "boulder",
+        routeType: "Boulders",
         grade: 7,
         attempts: 1,
         date: 1693516428,
@@ -126,7 +126,7 @@ export default Profile;
 const ProfileWrapper = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 15px;
+  padding: 15px;
   @media only screen and (max-width: 850px) {
     padding: 15px;
   }
@@ -153,8 +153,9 @@ const CenteredDiv = styled.div`
   max-width: 1200px;
   row-gap: 15px;
   column-gap: 15px;
-  @media only screen and (max-width: 1200px) {
-    grid-template-columns: 1fr;
+  @media only screen and (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 

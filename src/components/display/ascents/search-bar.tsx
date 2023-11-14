@@ -44,6 +44,7 @@ const SearchWrapper = styled.div`
   @media only screen and (max-width: 980px) {
     width: 100%;
   }
+  height: 40px;
 `;
 
 const SearchInput = styled.form`
@@ -56,14 +57,13 @@ const SearchInput = styled.form`
   border: 1px solid transparent;
   color: #fff !important;
   padding: 5px 10px;
-  width: 250px;
+  width: 400px;
   @media only screen and (max-width: 980px) {
     width: 100%;
   }
-  height: 30px;
+  height: 29px;
   &:focus-within {
-    border: 1px solid ${(props) => props.theme.colors.primaryWhite};
-    background-color: ${(props) => props.theme.colors.highlight3};
+    box-shadow: inset 0px 0px 2px 1px rgba(204, 208, 217, 0.5);
   }
   input {
     border: 0;

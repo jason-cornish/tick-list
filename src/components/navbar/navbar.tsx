@@ -11,7 +11,7 @@ const NavBar = () => {
     <Nav>
       <LeftSection>
         <Logo className="logo">
-          <Icon icon="book" size={28} />
+          <Icon icon="git-repo" size={28} />
           <h1>Tick-List</h1>
         </Logo>
 
@@ -51,8 +51,8 @@ const Nav = styled(RowWrapper)`
   justify-content: space-between;
   background-color: ${(props) => props.theme.colors.primaryBlack};
   font-family: ${(props) => props.theme.fonts.header};
-  box-shadow: inset 0px -12px 1px -12px rgba(204, 208, 217, 0.5);
-  /* box-shadow: ${(props) => props.theme.other.boxShadow}; */
+  box-shadow: inset 0px -12px 1px -12px rgba(204, 208, 217, 1);
+
   @media only screen and (max-width: 850px) {
     background-color: ${(props) => props.theme.colors.primaryBlack};
     top: 0px;
@@ -67,11 +67,11 @@ const Nav = styled(RowWrapper)`
 `;
 
 const Logo = styled(RowWrapper)`
-  column-gap: 10px;
+  column-gap: 12px;
   align-items: center;
   .bp5-icon {
-    fill: ${(props) => props.theme.colors.highlight1};
-    margin-bottom: -3px;
+    fill: ${(props) => props.theme.colors.primaryWhite};
+    margin-bottom: -8px;
   }
   color: ${(props) => props.theme.colors.primaryWhite};
 `;
@@ -82,9 +82,9 @@ const LeftSection = styled(RowWrapper)`
   justify-content: center;
   h1 {
     font-family: Archivo;
-    font-size: 35px;
+    font-size: 30px;
     color: ${(props) => props.theme.colors.primaryWhite};
-    font-weight: 600;
+    font-weight: 500;
   }
 `;
 

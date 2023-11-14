@@ -53,7 +53,7 @@ const SearchInput = styled.form`
   }
   height: 30px;
   &:focus-within {
-    box-shadow: inset 0px 0px 2px 1px rgba(204, 208, 217, 0.7);
+    box-shadow: inset 0px 0px 2px 1px rgba(204, 208, 217, 0.5);
   }
   input {
     border: 0;

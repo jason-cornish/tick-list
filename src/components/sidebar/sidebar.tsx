@@ -3,6 +3,7 @@ import { Icon } from "@blueprintjs/core";
 import { ColumnWrapper } from "../../reusable/styled-components";
 import { useState } from "react";
 import SidebarOption from "./sidebar-option";
+import Button from "../../reusable/button";
 
 type PropsType = {
   setSelectedTab: any;
@@ -51,7 +52,7 @@ const Sidebar = (props: PropsType) => {
     {
       icon: <StyledIcon icon="dashboard" size={22} />,
       onClick: () => selectTab("kpi"),
-      label: <p>My KPI</p>,
+      label: <p>KPI</p>,
       id: "kpi",
       selected: isTabSelected("kpi"),
       link: "/kpi",
@@ -80,9 +81,12 @@ const Sidebar = (props: PropsType) => {
             />
           );
         })}
-        <button onClick={handleCollapseExpand} className="collapseButton">
-          Collap
-        </button>
+        <Button
+          onClick={handleCollapseExpand}
+          text={!isCollapsed ? "Collapse" : ""}
+          icon={<Icon icon="horizontal-inbetween" size={22} />}
+          type="regular"
+        ></Button>
       </SidebarWrapper>
     </Wrapper>
   );
@@ -99,7 +103,7 @@ const Wrapper = styled.div`
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
   left: 0;
-  top: 71px;
+  top: 70px;
   max-height: calc(100% - 80px);
   padding: 0px 10px;
   box-sizing: border-box;
@@ -107,7 +111,7 @@ const Wrapper = styled.div`
     width: 52px;
   }
   .expanded {
-    width: 170px;
+    width: 150px;
   }
   @media only screen and (max-width: 850px) {
     position: fixed;
@@ -141,6 +145,7 @@ const SidebarWrapper = styled(ColumnWrapper)`
   align-items: center;
   row-gap: 10px;
   box-sizing: border-box;
+  height: 100%;
 
   button {
     width: 50px;

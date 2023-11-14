@@ -32,12 +32,3 @@ const LogAscentWrapper = styled(RowWrapper)`
     font-size: 20px;
   }
 `;
-
-const AcctIcon = styled.div`
-  padding: 7px;
-  background-color: ${(props) => props.theme.colors.highlight1};
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;

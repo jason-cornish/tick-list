@@ -16,7 +16,7 @@ const ProfileHighlights = (props: any) => {
 
   const maxBoulderGrade = useMemo(() => {
     const boulders = profile.ascents.filter((ascent: AscentType) => {
-      return ascent.routeType === "boulder";
+      return ascent.routeType === "Boulders";
     });
 
     return Math.max(...boulders.map((ascent: AscentType) => ascent.grade)) || 0;
@@ -94,7 +94,6 @@ const ProfileHighlightsWrapper = styled(RowWrapper)`
 
 const HighlightWrapper = styled(ColumnWrapper)`
   color: ${(props) => props.theme.colors.primaryWhite};
-
   box-sizing: border-box;
   align-items: center;
   row-gap: 5px;
@@ -108,12 +107,8 @@ const Highlight = styled(RowWrapper)`
   column-gap: 15px;
   align-items: center;
   justify-content: center;
+  box-shadow: ${(props) => props.theme.other.boxShadow};
   height: 120px;
-  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.1),
-    /* 2. shadow ring 👇 */ 0 0 0 1px hsla(230, 13%, 9%, 0.075),
-    /* 3. multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(230, 13%, 9%, 0.02),
-    0 0.9px 1.5px hsla(230, 13%, 9%, 0.045),
-    0 3.5px 6px hsla(230, 13%, 9%, 0.09);
   h1 {
     font-size: 35px;
     margin-top: -3px;

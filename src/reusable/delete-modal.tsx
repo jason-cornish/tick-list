@@ -11,7 +11,7 @@ type PropsType = {
   deleteAscents: any;
 };
 
-const ConfirmModal = (props: PropsType) => {
+const DeleteModal = (props: PropsType) => {
   const {
     displayModal,
     setDisplayModal,
@@ -60,7 +60,7 @@ const ConfirmModal = (props: PropsType) => {
   );
 };
 
-export default ConfirmModal;
+export default DeleteModal;
 
 const DisplayWrapper = styled.div`
   .visible {

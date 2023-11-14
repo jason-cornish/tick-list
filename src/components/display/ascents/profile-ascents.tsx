@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { DataContext } from "../../../App";
 import Button from "../../../reusable/button";
-import ConfirmModal from "../../../reusable/confirm-modal";
+import ConfirmModal from "../../../reusable/delete-modal";
 import {
   ColumnWrapper,
   GreyText,
@@ -11,11 +11,14 @@ import {
 } from "../../../reusable/styled-components";
 import SearchBar from "./search-bar";
 import AscentType from "./models/ascent";
+import DeleteModal from "../../../reusable/delete-modal";
+import Toggle from "../../../reusable/toggle-button";
+import FiltersModal from "../../../reusable/filters-modal";
 
 interface SelectedFilters {
-  attempts: boolean | number;
+  maxAttempts: number | string;
   grade: boolean | number;
-  routeType: string;
+  routeType: string | boolean;
   angle: any;
   name: string;
 }
@@ -29,9 +32,9 @@ const ProfileAscents = (props: any) => {
   const { profile, setProfile } = props;
 
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>({
-    attempts: false,
+    maxAttempts: "Any",
     grade: false,
-    routeType: "boulder",
+    routeType: "Boulders",
     angle: [],
     name: "",
   });
@@ -47,12 +50,14 @@ const ProfileAscents = (props: any) => {
   };
 
   const stringifyGrade = (grade: number, routeType: string) => {
-    return routeType === "boulder" ? `V${grade}` : `5.${grade}`;
+    return routeType === "Boulders" ? `V${grade}` : `5.${grade}`;
   };
 
   /*filters out ascents that do not meet selected filter criteria*/
   const validateAscent = (ascent: AscentType) => {
-    let ascentValid = ascent.routeType === selectedFilters.routeType;
+    let ascentValid = selectedFilters.routeType === ascent.routeType;
+    // ? ascent.routeType === selectedFilters.routeType
+    // : true;
 
     if (ascentValid && selectedFilters.name) {
       ascentValid = ascent.name.includes(selectedFilters.name);
@@ -60,8 +65,8 @@ const ProfileAscents = (props: any) => {
     if (ascentValid && selectedFilters.grade) {
       ascentValid = ascent.grade === selectedFilters.grade;
     }
-    if (ascentValid && selectedFilters.attempts) {
-      ascentValid = ascent.attempts >= selectedFilters.attempts;
+    if (ascentValid && selectedFilters.maxAttempts !== "Any") {
+      ascentValid = ascent.attempts >= selectedFilters.maxAttempts;
     }
     if (ascentValid && selectedFilters.angle.length > 0) {
       ascentValid = selectedFilters.angle.includes(ascent.angle);
@@ -140,8 +145,10 @@ const ProfileAscents = (props: any) => {
     );
   };
 
-  const openModal = (modalName: string) => {
-    setShowGreyLayer(true);
+  const openModal = (modalName: string, showGreyLayer: boolean) => {
+    if (showGreyLayer) {
+      setShowGreyLayer(true);
+    }
     setDisplayModal({ ...displayModal, [modalName]: true });
   };
 
@@ -152,9 +159,11 @@ const ProfileAscents = (props: any) => {
     setProfile({ ...profile, ascents: filteredAscents });
   };
 
+  const applyFilters = () => {};
+
   return (
     <ProfileAscentsWrapper>
-      <ConfirmModal
+      <DeleteModal
         selectedAscents={selectedAscents}
         setSelectedAscents={setSelectedAscents}
         displayModal={displayModal}
@@ -162,77 +171,39 @@ const ProfileAscents = (props: any) => {
         setShowGreyLayer={setShowGreyLayer}
         deleteAscents={deleteAscents}
       />
-      <ConfirmModal
-        selectedAscents={selectedAscents}
-        setSelectedAscents={setSelectedAscents}
+      <FiltersModal
+        confirmChanges={applyFilters}
         displayModal={displayModal}
         setDisplayModal={setDisplayModal}
         setShowGreyLayer={setShowGreyLayer}
-        deleteAscents={deleteAscents}
+        state={selectedFilters}
       />
 
       <ControlsRow>
-        <GreyText style={{ marginBottom: "20px" }}>Ascents</GreyText>
-        <RowWrapper>
-          <Button
-            icon={<Icon icon="filter" />}
-            text="Filter Ascents"
-            onClick={() => openModal("filterModal")}
-            type="regular"
-          />
-          <SearchBar
-            selectedFilters={selectedFilters}
-            setSelectedFilters={setSelectedFilters}
-          />
+        {/* <GreyText>Ascents</GreyText> */}
+        <RowWrapper className="controlsRow">
+          <RowWrapper>
+            <SearchBar
+              selectedFilters={selectedFilters}
+              setSelectedFilters={setSelectedFilters}
+            />
+            <Button
+              icon={<Icon icon="filter" size={16} />}
+              text="Filter"
+              onClick={() => openModal("filtersModal", true)}
+              type="regular"
+            />
+            <Button
+              icon={<Icon icon="trash" />}
+              text="Delete"
+              onClick={() => openModal("deleteModal", true)}
+              type="regular"
+            />
+          </RowWrapper>
         </RowWrapper>
-
-        {/* <Button
-          icon={<Icon icon="add" />}
-          text="Log Ascent"
-          onClick={() => openModal("filterModal")}
-          type="fancy"
-        /> */}
-
-        {/* <Button
-          icon={<Icon icon="edit" />}
-          text="Edit"
-          onClick={editSelected}
-          type="regular"
-        /> */}
-        {/* <Button
-          icon={<Icon icon="trash" />}
-          text="Delete Ascents"
-          onClick={() => openModal("deleteModal")}
-          type="regular"
-        /> */}
       </ControlsRow>
 
       <SelectorWrapper>
-        {/* <TabRow>
-          <Tab
-            onClick={() => {
-              setSelectedAscents([]);
-              setSelectedFilters({ ...selectedFilters, routeType: "boulder" });
-            }}
-            className={
-              selectedFilters.routeType === "boulder" ? "active" : "inactive"
-            }
-          >
-            <TabName>Boulders</TabName>
-          </Tab>
-          <Tab
-            onClick={() => {
-              setSelectedAscents([]);
-              setSelectedFilters({ ...selectedFilters, routeType: "route" });
-            }}
-            className={
-              selectedFilters.routeType === "route" ? "active" : "inactive"
-            }
-          >
-            <TabName>Routes</TabName>
-          </Tab>
-        </TabRow>
-        <Seperator /> */}
         <AscentsContainer>{renderAscents()}</AscentsContainer>
       </SelectorWrapper>
     </ProfileAscentsWrapper>
@@ -241,98 +212,55 @@ const ProfileAscents = (props: any) => {
 
 export default ProfileAscents;
 
-const AbsoluteWrapper = styled.div``;
-
 const ProfileAscentsWrapper = styled(ColumnWrapper)`
   column-gap: 25px;
-  position: relative;
   padding: 20px;
   background-color: ${(props) => props.theme.colors.primaryBlack};
   border-radius: ${(props) => props.theme.other.borderRadius};
   box-shadow: ${(props) => props.theme.other.boxShadow};
 `;
 
-const ControlsRow = styled(RowWrapper)`
-  column-gap: 10px;
+const ControlsRow = styled(ColumnWrapper)`
   margin-bottom: 20px;
-  justify-content: space-between;
+  align-items: space-between;
+  div {
+    column-gap: 10px;
+  }
+  .controlsRow {
+    column-gap: 10px;
+  }
 `;
 
-const Seperator = styled.div`
-  background-color: ${(props) => props.theme.colors.primaryWhite};
-  height: 100%;
-  width: 2px;
-  border-radius: 3px;
+const Dropdown = styled(ColumnWrapper)`
+  padding: 20px;
+  background-color: ${(props) => props.theme.colors.primaryBlack};
+  border-radius: ${(props) => props.theme.other.borderRadius};
+  box-shadow: ${(props) => props.theme.other.boxShadow};
+  position: absolute;
+  top: 40px;
+  height: 100px;
+  z-index: 2;
 `;
 
 const SelectorWrapper = styled(RowWrapper)`
   column-gap: 20px;
 `;
 
-const TabRow = styled(ColumnWrapper)`
-  row-gap: 10px;
-  .active {
-    transition: background-color 300ms linear;
-    background-color: ${(props) => props.theme.colors.highlight1};
-
-    p {
-      color: ${(props) => props.theme.colors.primaryBlack};
-    }
-  }
-  .inactive {
-    transition: background-color 300ms linear;
-    :hover {
-      background-color: ${(props) => props.theme.colors.highlight2};
-    }
-  }
-`;
-
-const Tab = styled(ColumnWrapper)`
-  cursor: pointer;
-  align-items: center;
-  position: relative;
-
-  border-radius: ${(props) => props.theme.other.borderRadius};
-  padding: 5px 14px;
-  /* .active {
-    position: relative;
-    background-color: ${(props) => props.theme.colors.highlight1};
-    width: calc(100% + 4px);
-    height: 4px;
-    border-radius: 2px;
-  }
-  .inactive {
-    width: 0px;
-  } */
-`;
-
-const TabName = styled.p`
-  color: ${(props) => props.theme.colors.primaryWhite};
-  font-size: 20px;
-  margin-top: 3px;
-`;
-
-const Underline = styled.div``;
-
 const AscentsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  /* min-width: 690px;
-  @media only screen and (min-width: 1500px) {
-    max-width: 370px;
-  } */
   .selected {
     border: 2px solid ${(props) => props.theme.colors.highlight1};
     background-color: ${(props) => props.theme.colors.highlight4};
   }
   .unselected {
     box-shadow: ${(props) => props.theme.other.boxShadow};
-    border: 2px solid transparent;
+    border: 2px solid ${(props) => props.theme.colors.primaryBlack};
     background-color: ${(props) => props.theme.colors.highlight3};
     :hover {
       background-color: ${(props) => props.theme.colors.highlight4};
-      border: 2px solid ${(props) => props.theme.colors.highlight4};
+      border: 2px solid ${(props) => props.theme.colors.primaryBlack};
     }
   }
 `;
@@ -371,6 +299,9 @@ const Ascent = styled(RowWrapper)<AscentProps>`
   cursor: pointer;
   opacity: 0;
   animation: fadeIn 500ms ease-in ${(props) => `${props.delay}ms`} forwards;
+  @media only screen and (max-width: 850px) {
+    width: 100%;
+  }
   @keyframes fadeIn {
     0% {
       opacity: 0;

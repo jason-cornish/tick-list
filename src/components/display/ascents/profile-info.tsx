@@ -14,11 +14,10 @@ const ProfileInfo = (props: any) => {
 
   return (
     <ProfileInfoWrapper>
-      <WideWrapper>
+      <WideWrapper className="wideWrapper">
         {profile.profileImage}
         <RowWrapper className="row">
           <ProfileText>
-            {/* <GreyText>User Profile</GreyText> */}
             <ProfileName>
               <h1 id="profile">{profile.name}</h1>
             </ProfileName>
@@ -41,14 +40,40 @@ const ProfileInfo = (props: any) => {
               </ProfileDetail>
             </ProfileDetails>
             <ProfileAbout profile={profile} />
-
-            {/* <DisplayConditional>
-          <ProfileHighlights profile={profile} />
-        </DisplayConditional> */}
           </ProfileText>
         </RowWrapper>
       </WideWrapper>
-      <MobileWrapper></MobileWrapper>
+      <MobileWrapper className="mobileWrapper">
+        <RowWrapper>
+          {profile.profileImage}
+          <ProfileName>
+            <h1 id="profile">{profile.name}</h1>
+          </ProfileName>
+        </RowWrapper>
+        <RowWrapper className="row">
+          <ProfileText>
+            <ProfileDetails>
+              <ProfileDetail>
+                <span>@</span>
+                <p>jason_cornish</p>
+              </ProfileDetail>
+              <ProfileDetail>
+                <Icon icon="map-marker" size={20} />
+                <p>He/Him</p>
+              </ProfileDetail>
+              <ProfileDetail>
+                <Icon icon="map-marker" size={20} />
+                <p>Austin, TX</p>
+              </ProfileDetail>
+              <ProfileDetail>
+                <Icon icon="flag" size={20} />
+                <p>Joined Dec 2018</p>
+              </ProfileDetail>
+            </ProfileDetails>
+            <ProfileAbout profile={profile} />
+          </ProfileText>
+        </RowWrapper>
+      </MobileWrapper>
     </ProfileInfoWrapper>
   );
 };
@@ -62,14 +87,31 @@ const ProfileInfoWrapper = styled(RowWrapper)`
   width: 100%;
   font-family: ${(props) => props.theme.fonts.header};
   background-color: ${(props) => props.theme.colors.primaryBlack};
+  box-shadow: ${(props) => props.theme.other.boxShadow};
   border-radius: ${(props) => props.theme.other.borderRadius};
   position: relative;
   min-width: 600px;
+  .mobileWrapper {
+    display: none;
+  }
+  .wideWrapper {
+    display: flex;
+  }
+  @media only screen and (max-width: 850px) {
+    min-width: auto;
+    .mobileWrapper {
+      display: flex;
+      min-width: 100%;
+    }
+    .wideWrapper {
+      display: none;
+    }
+  }
 `;
 
 const WideWrapper = styled(RowWrapper)`
+  width: 100%;
   column-gap: 30px;
-  border-radius: ${(props) => props.theme.other.borderRadius};
   .row {
     column-gap: 20px;
   }
@@ -78,14 +120,19 @@ const WideWrapper = styled(RowWrapper)`
     height: 170px;
     flex-shrink: 0;
     border-radius: ${(props) => props.theme.other.borderRadius};
-    @media only screen and (max-width: 850px) {
+  }
+`;
+
+const MobileWrapper = styled(ColumnWrapper)`
+  @media only screen and (max-width: 850px) {
+    max-width: 400px;
+    .profileImg {
+      display: none;
       width: 100px;
       height: 100px;
     }
   }
 `;
-
-const MobileWrapper = styled(ColumnWrapper)``;
 
 const ProfileText = styled(ColumnWrapper)`
   row-gap: 5px;
@@ -95,7 +142,7 @@ const ProfileText = styled(ColumnWrapper)`
   }
   font-size: 16px;
   #profile {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 500;
     margin-bottom: 5px;
   }
@@ -117,6 +164,7 @@ const ProfileName = styled(RowWrapper)`
 
 const ProfileDetails = styled.div`
   display: flex;
+  flex-direction: row;
   column-gap: 30px;
 `;
 
